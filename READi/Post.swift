@@ -17,6 +17,7 @@ class Post: CustomStringConvertible {
 	
 	static let FeedbackUpdatedNotification = Notification.Name("READi.Post.FeedbackUpdatedNotification")
 	static let FeedbackFailedNotification = Notification.Name("READi.Post.FeedbackFailedNotification")
+	static let FlagFailedNotification = Notification.Name("READi.Post.FlagFailedNotification")
 	
 	func postFeedbackNotification() {
 		DispatchQueue.main.async {
@@ -98,8 +99,9 @@ class Post: CustomStringConvertible {
 	}
 	
 	
-	enum FeedbackError: Error {
+	enum PostError: Error {
 		case feedbackFailed(details: String?)
+		case spamFlagFailed(details: String?)
 	}
 	
 	func send(feedback: Feedback) {
@@ -119,18 +121,18 @@ class Post: CustomStringConvertible {
 					
 					if let errorDetails = json as? [String:Any] {
 						print(errorDetails)
-						throw FeedbackError.feedbackFailed(details: errorDetails["error_message"] as? String)
+						throw PostError.feedbackFailed(details: errorDetails["error_message"] as? String)
 					}
 					
 					guard let feedbacks = json as? [[String:Any]] else {
 						print("Could not parse feedback!")
-						throw FeedbackError.feedbackFailed(details: nil)
+						throw PostError.feedbackFailed(details: nil)
 					}
 					
 					
 					self.feedback = PostFeedback.from(json: feedbacks)
 					self.postFeedbackNotification()
-				} catch FeedbackError.feedbackFailed(let details) {
+				} catch PostError.feedbackFailed(let details) {
 					print("Could not send feedback!")
 					DispatchQueue.main.async {
 						NotificationCenter.default.post(
@@ -149,6 +151,57 @@ class Post: CustomStringConvertible {
 					}
 				}
 			}
+		}
+		
+	}
+	
+	
+	
+	//Flags a post as spam.
+	func flag() {
+		(UIApplication.shared.delegate as! AppDelegate).getWriteToken {writeToken in
+			guard let token = writeToken else { return }
+			
+			
+			DispatchQueue.global(qos: .background).async {
+				do {
+					guard let response = try client.parseJSON(
+						client.post("https://metasmoke.erwaysoftware.com/api/w/post/\(self.id!)/spam_flag", [
+							"key":client.key,
+							"token":token
+							]
+						)
+					) as? [String:Any] else {
+							throw PostError.spamFlagFailed(details: nil)
+					}
+					
+					if response["status"] as? String == "failed" {
+						throw PostError.spamFlagFailed(details: response["message"] as? String)
+					}
+					
+					print(response)
+					
+				} catch PostError.spamFlagFailed(let details) {
+					print("Failed to flag as spam!")
+					DispatchQueue.main.async {
+						NotificationCenter.default.post(
+							name: Post.FlagFailedNotification,
+							object: self,
+							userInfo: ["errorDetails":details as Any]
+						)
+					}
+				} catch {
+					print("Failed to flag as spam!")
+					DispatchQueue.main.async {
+						NotificationCenter.default.post(
+							name: Post.FlagFailedNotification,
+							object: self
+						)
+					}
+				}
+			}
+			
+			
 		}
 	}
 }

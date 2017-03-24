@@ -41,6 +41,11 @@ enum Feedback {
 
 extension UIViewController {
 	func alert(_ message: String, details: String? = nil) {
+		if presentedViewController != nil {
+			//hack until I can think of a better solution
+			return
+		}
+		
 		let alertController = UIAlertController(title: message, message: details, preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 		self.present(alertController, animated: true)

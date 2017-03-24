@@ -84,6 +84,7 @@ class PostTableViewCell: UITableViewCell {
 	
 	@IBAction func spamPressed(_ sender: Any) {
 		feedbackPressed(.spam)
+		post?.flag()
 	}
 	@IBAction func vandalismPressed(_ sender: Any) {
 		feedbackPressed(.vandalism)

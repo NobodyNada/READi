@@ -19,6 +19,13 @@ class MasterViewController: UITableViewController {
 		}
 	}
 	
+	func flagFailed(notification: NSNotification) {
+		if self.view.window != nil {
+			let details = notification.userInfo?["errorDetails"] as? String
+			self.alert("Failed to flag as spam!", details: details)
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if let split = self.splitViewController {
@@ -34,6 +41,12 @@ class MasterViewController: UITableViewController {
 			self,
 			selector: #selector(feedbackFailed(notification:)),
 			name: Post.FeedbackFailedNotification,
+			object: nil
+		)
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(flagFailed(notification:)),
+			name: Post.FlagFailedNotification,
 			object: nil
 		)
 		

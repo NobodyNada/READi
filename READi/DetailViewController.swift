@@ -21,6 +21,7 @@ class DetailViewController: UIViewController {
 	
 	@IBAction func spamPressed(_ sender: Any) {
 		feedbackPressed(.spam)
+		post?.flag()
 	}
 	@IBAction func vandalismPressed(_ sender: Any) {
 		feedbackPressed(.vandalism)
@@ -73,6 +74,13 @@ class DetailViewController: UIViewController {
 		self.alert("Failed to send feedback!", details: details)
 	}
 	
+	func flagFailed(notification: NSNotification) {
+		guard view.window != nil else { return }
+		
+		let details = notification.userInfo?["errorDetails"] as? String
+		self.alert("Failed to flag as spam!", details: details)
+	}
+	
 	
 	func configureView() {
 		// Update the user interface for the detail item.
@@ -104,7 +112,14 @@ class DetailViewController: UIViewController {
 			NotificationCenter.default.addObserver(
 				self,
 				selector: #selector(feedbackFailed(notification:)),
-				name: Post.FeedbackUpdatedNotification,
+				name: Post.FeedbackFailedNotification,
+				object: post
+			)
+			
+			NotificationCenter.default.addObserver(
+				self,
+				selector: #selector(flagFailed(notification:)),
+				name: Post.FlagFailedNotification,
 				object: post
 			)
 			
