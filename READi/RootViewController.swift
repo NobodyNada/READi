@@ -15,6 +15,17 @@ class RootViewController: UISplitViewController {
 		
 	}
 	
+	func handleAuthenticationError() {
+		DispatchQueue.main.async {
+			let alert = UIAlertController(title: "Could not get write token!", message: nil, preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+			self.present(alert, animated: true)
+			
+			self.authenticationCompletions.forEach { $0(nil) }
+			self.authenticationCompletions.removeAll()
+		}
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
@@ -32,7 +43,11 @@ class RootViewController: UISplitViewController {
 			
 			DispatchQueue.global(qos: .background).async {
 				do {
-					if code == nil { throw NSError() }
+					if code == nil {
+						self.handleAuthenticationError()
+						return
+					}
+					
 					let json = try client.parseJSON(
 						client.get("https://metasmoke.erwaysoftware.com/oauth/token?key=\(client.key)&code=\(code!)")
 					)
@@ -43,14 +58,7 @@ class RootViewController: UISplitViewController {
 					self.authenticationCompletions.removeAll()
 				} catch {
 					print(error)
-					DispatchQueue.main.async {
-						let alert = UIAlertController(title: "Could not get write token!", message: nil, preferredStyle: .alert)
-						alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-						self.present(alert, animated: true)
-						
-						self.authenticationCompletions.forEach { $0(nil) }
-						self.authenticationCompletions.removeAll()
-					}
+					self.handleAuthenticationError()
 				}
 				
 			}
