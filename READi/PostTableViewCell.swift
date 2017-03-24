@@ -60,7 +60,6 @@ class PostTableViewCell: UITableViewCell {
 				object: post
 			)
 			
-			
 			titleLabel.text = post.title
 			
 			let htmlData = (post.body +

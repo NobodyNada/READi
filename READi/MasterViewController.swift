@@ -12,13 +12,30 @@ class MasterViewController: UITableViewController {
 	var detailViewController: DetailViewController? = nil
 	var cachedPosts = [Post]()
 	
+	func feedbackFailed(notification: NSNotification) {
+		if self.view.window != nil {
+			let details = notification.userInfo?["errorDetails"] as? String
+			self.alert("Failed to send feedback!", details: details)
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if let split = self.splitViewController {
 			let controllers = split.viewControllers
-			self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+			let navigationController = (controllers[controllers.count-1] as! UINavigationController)
+			self.detailViewController = navigationController.topViewController as? DetailViewController
+			
 		}
+		
+		
+		
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(feedbackFailed(notification:)),
+			name: Post.FeedbackFailedNotification,
+			object: nil
+		)
 		
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 200
@@ -162,6 +179,10 @@ class MasterViewController: UITableViewController {
 				print(error)
 			}
 		}
+	}
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self)
 	}
 }
 

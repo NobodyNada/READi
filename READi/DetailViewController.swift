@@ -66,6 +66,13 @@ class DetailViewController: UIViewController {
 		}
 	}
 	
+	func feedbackFailed(notification: NSNotification) {
+		guard view.window != nil else { return }
+		
+		let details = notification.userInfo?["errorDetails"] as? String
+		self.alert("Failed to send feedback!", details: details)
+	}
+	
 	
 	func configureView() {
 		// Update the user interface for the detail item.
@@ -93,6 +100,14 @@ class DetailViewController: UIViewController {
 				name: Post.FeedbackUpdatedNotification,
 				object: post
 			)
+			
+			NotificationCenter.default.addObserver(
+				self,
+				selector: #selector(feedbackFailed(notification:)),
+				name: Post.FeedbackUpdatedNotification,
+				object: post
+			)
+			
 			
 			updateFeedback()
 		}

@@ -16,6 +16,7 @@ class Post: CustomStringConvertible {
 	var feedback: [PostFeedback]!
 	
 	static let FeedbackUpdatedNotification = Notification.Name("READi.Post.FeedbackUpdatedNotification")
+	static let FeedbackFailedNotification = Notification.Name("READi.Post.FeedbackFailedNotification")
 	
 	func postFeedbackNotification() {
 		DispatchQueue.main.async {
@@ -97,6 +98,10 @@ class Post: CustomStringConvertible {
 	}
 	
 	
+	enum FeedbackError: Error {
+		case feedbackFailed(details: String?)
+	}
+	
 	func send(feedback: Feedback) {
 		(UIApplication.shared.delegate as! AppDelegate).getWriteToken {writeToken in
 			guard let token = writeToken else { return }
@@ -114,19 +119,34 @@ class Post: CustomStringConvertible {
 					
 					if let errorDetails = json as? [String:Any] {
 						print(errorDetails)
-						return
+						throw FeedbackError.feedbackFailed(details: errorDetails["error_message"] as? String)
 					}
 					
 					guard let feedbacks = json as? [[String:Any]] else {
 						print("Could not parse feedback!")
-						return
+						throw FeedbackError.feedbackFailed(details: nil)
 					}
 					
 					
 					self.feedback = PostFeedback.from(json: feedbacks)
 					self.postFeedbackNotification()
+				} catch FeedbackError.feedbackFailed(let details) {
+					print("Could not send feedback!")
+					DispatchQueue.main.async {
+						NotificationCenter.default.post(
+							name: Post.FeedbackFailedNotification,
+							object: self,
+							userInfo: ["errorDetails":details as Any]
+						)
+					}
 				} catch {
 					print("Could not send feedback!")
+					DispatchQueue.main.async {
+						NotificationCenter.default.post(
+							name: Post.FeedbackFailedNotification,
+							object: self
+						)
+					}
 				}
 			}
 		}

@@ -17,9 +17,7 @@ class RootViewController: UISplitViewController {
 	
 	func handleAuthenticationError() {
 		DispatchQueue.main.async {
-			let alert = UIAlertController(title: "Could not get write token!", message: nil, preferredStyle: .alert)
-			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-			self.present(alert, animated: true)
+			self.alert("Could not get write token!")
 			
 			self.authenticationCompletions.forEach { $0(nil) }
 			self.authenticationCompletions.removeAll()
