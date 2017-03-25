@@ -12,6 +12,10 @@ class MasterViewController: UITableViewController {
 	var detailViewController: DetailViewController? = nil
 	var cachedPosts = [Post]()
 	
+	var ws = WebSocket("wss://metasmoke.erwaysoftware.com/cable")
+	private var lastMessage: Date = Date()
+	private var messageTimer: Timer!
+	
 	func feedbackFailed(notification: NSNotification) {
 		if self.view.window != nil {
 			let details = notification.userInfo?["errorDetails"] as? String
@@ -25,6 +29,84 @@ class MasterViewController: UITableViewController {
 			self.alert("Failed to flag as spam!", details: details)
 		}
 	}
+	
+	
+	
+	//MARK: - WebSocket
+	
+	func checkMessage(timer: Timer) {
+		if Date.timeIntervalSinceReferenceDate - lastMessage.timeIntervalSinceReferenceDate > 30 {
+			ws.close(1002, reason: "no pings for 30 seconds")
+			//there's probably a better error code than 1002 (protocol error)
+		}
+	}
+	
+	func closeWebsocket() {
+		ws.close()
+	}
+	
+	func openWebsocket() {
+		if messageTimer != nil { messageTimer.invalidate() }
+		messageTimer = Timer.scheduledTimer(
+			timeInterval: 30,
+			target: self,
+			selector: #selector(checkMessage(timer:)),
+			userInfo: nil, repeats: true)
+		
+		ws.event.open = {
+			print("Websocket opened!")
+			self.ws.send(text:
+				"{\"identifier\": " +
+					"\"{\\\"channel\\\":\\\"ApiChannel\\\"," +
+					"\\\"key\\\":\\\"\(client.key)\\\"}\"," +
+				"\"command\": \"subscribe\"}"
+			)
+		}
+		ws.event.close = {code, reason, clean in
+			if !clean {
+				//attempt to reopen the websocket
+				self.openWebsocket()
+			}
+		}
+		ws.event.error = { error in print(error) }
+		
+		ws.event.message = {message in
+			self.lastMessage = Date()
+			guard let text = message as? String else { return }
+			print(text)
+			guard let json = (try? client.parseJSON(text) as? [String:Any]) ?? nil else { return }
+			guard let message = json["message"] as? [String:Any] else { return }
+			
+			if let feedback = message["feedback"] as? [String:String] {
+				self.received(feedback: feedback)
+			}
+		}
+		
+		
+		ws.open()
+	}
+	
+	func received(feedback: [String:String]) {
+		DispatchQueue.global().async {
+			do {
+				let indices = self.cachedPosts.indices.filter { self.cachedPosts[$0].link == feedback["post_link"] }
+				for index in indices {
+					try self.cachedPosts[index].fetchFeedback(client: client)
+				}
+				
+				DispatchQueue.main.async {
+					self.tableView.reloadRows(
+						at: indices.map { IndexPath(row: $0, section: 0) },
+						with: .automatic
+					)
+				}
+			} catch {
+				print(error)
+			}
+		}
+	}
+	
+	//MARK: - iOS event handling
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,6 +134,10 @@ class MasterViewController: UITableViewController {
 		
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 200
+		
+		openWebsocket()
+		
+		refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +152,23 @@ class MasterViewController: UITableViewController {
 	
 	func insertNewObject(_ sender: Any) {
 		
+	}
+	
+	func refresh(_ sender: Any) {
+		print("Refreshing!")
+		DispatchQueue.global().async {
+			do {
+				self.cachedPosts = try self.fetchPosts(page: 1, pageSize: 10)
+			} catch {
+				print(error)
+				self.alert("Failed to refresh!")
+			}
+			
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+				self.refreshControl?.endRefreshing()
+			}
+		}
 	}
 	
 	// MARK: - Segues

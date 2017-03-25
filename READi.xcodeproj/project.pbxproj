@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AB1EC97D1E8355E000B895EF /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1EC97C1E8355E000B895EF /* AuthenticationViewController.swift */; };
+		AB8026701E8702930042D757 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80266F1E8702930042D757 /* WebSocket.swift */; };
+		AB8026731E8702B80042D757 /* LICENSE-SwiftWebSocket.txt in Resources */ = {isa = PBXBuildFile; fileRef = AB8026721E8702B80042D757 /* LICENSE-SwiftWebSocket.txt */; };
+		AB8026781E8704FE0042D757 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8026751E8704800042D757 /* libz.tbd */; };
 		ABAB4D901E847D470032179F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB4D8F1E847D470032179F /* RootViewController.swift */; };
 		ABCDCEBF1E83047D00450E8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEBE1E83047D00450E8D /* AppDelegate.swift */; };
 		ABCDCEC11E83047D00450E8D /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEC01E83047D00450E8D /* MasterViewController.swift */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		AB1EC97C1E8355E000B895EF /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		AB80266F1E8702930042D757 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		AB8026721E8702B80042D757 /* LICENSE-SwiftWebSocket.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE-SwiftWebSocket.txt"; sourceTree = "<group>"; };
+		AB8026751E8704800042D757 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ABAB4D8F1E847D470032179F /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		ABCDCEBB1E83047D00450E8D /* READi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = READi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCDCEBE1E83047D00450E8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8026781E8704FE0042D757 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +97,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB8026711E8702960042D757 /* SwiftWebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				AB80266F1E8702930042D757 /* WebSocket.swift */,
+				AB8026721E8702B80042D757 /* LICENSE-SwiftWebSocket.txt */,
+			);
+			name = SwiftWebSocket;
+			sourceTree = "<group>";
+		};
+		AB8026741E8704800042D757 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB8026751E8704800042D757 /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ABCDCEB21E83047D00450E8D = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +121,7 @@
 				ABCDCED41E83047D00450E8D /* READiTests */,
 				ABCDCEDF1E83047D00450E8D /* READiUITests */,
 				ABCDCEBC1E83047D00450E8D /* Products */,
+				AB8026741E8704800042D757 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +152,7 @@
 				ABCDCEC71E83047D00450E8D /* Assets.xcassets */,
 				ABCDCEC91E83047D00450E8D /* LaunchScreen.storyboard */,
 				ABCDCECC1E83047D00450E8D /* Info.plist */,
+				AB8026711E8702960042D757 /* SwiftWebSocket */,
 			);
 			path = READi;
 			sourceTree = "<group>";
@@ -259,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8026731E8702B80042D757 /* LICENSE-SwiftWebSocket.txt in Resources */,
 				ABCDCECB1E83047D00450E8D /* LaunchScreen.storyboard in Resources */,
 				ABCDCEC81E83047D00450E8D /* Assets.xcassets in Resources */,
 				ABCDCEF31E8304A700450E8D /* Main.storyboard in Resources */,
@@ -289,6 +316,7 @@
 				ABAB4D901E847D470032179F /* RootViewController.swift in Sources */,
 				ABCDCEC31E83047D00450E8D /* DetailViewController.swift in Sources */,
 				AB1EC97D1E8355E000B895EF /* AuthenticationViewController.swift in Sources */,
+				AB8026701E8702930042D757 /* WebSocket.swift in Sources */,
 				ABCDCEC11E83047D00450E8D /* MasterViewController.swift in Sources */,
 				ABCDCEF11E83049C00450E8D /* PostTableViewCell.swift in Sources */,
 				ABCDCEF01E83049C00450E8D /* Client.swift in Sources */,

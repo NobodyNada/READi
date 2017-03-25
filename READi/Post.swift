@@ -13,6 +13,7 @@ class Post: CustomStringConvertible {
 	var title: String!
 	var body: String!
 	var why: String!
+	var link: String!
 	var feedback: [PostFeedback]!
 	
 	static let FeedbackUpdatedNotification = Notification.Name("READi.Post.FeedbackUpdatedNotification")
@@ -73,6 +74,7 @@ class Post: CustomStringConvertible {
 		id = json["id"] as? Int
 		title = json["title"] as? String
 		why = json["why"] as? String
+		link = json["link"] as? String
 	}
 	
 	var description: String {

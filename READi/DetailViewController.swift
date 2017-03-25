@@ -81,15 +81,13 @@ class DetailViewController: UIViewController {
 		self.alert("Failed to flag as spam!", details: details)
 	}
 	
+	override func viewWillLayoutSubviews() {
+		bodyTextView.sizeToFit()
+		reasonTextView.sizeToFit()
+	}
 	
 	func configureView() {
 		// Update the user interface for the detail item.
-		bodyTextView?.layer.borderColor = #colorLiteral(red: 0.8374213576, green: 0.8374213576, blue: 0.8374213576, alpha: 1).cgColor
-		reasonTextView?.layer.borderColor = #colorLiteral(red: 0.8374213576, green: 0.8374213576, blue: 0.8374213576, alpha: 1).cgColor
-		bodyTextView?.layer.borderWidth = 1
-		reasonTextView?.layer.borderWidth = 1
-		bodyTextView?.layer.cornerRadius = 2
-		reasonTextView?.layer.cornerRadius = 2
 		
 		spamButton?.tintColor = Feedback.spam.color
 		vandalismButton?.tintColor = Feedback.vandalism.color

@@ -68,7 +68,10 @@ class PostTableViewCell: UITableViewCell {
 			
 			bodyLabel.attributedText = (try? NSAttributedString(
 				data: htmlData,
-				options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType],
+				options: [
+					NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
+					NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue
+					],
 				documentAttributes: nil
 			)) ?? NSAttributedString(string: post.body)
 			
