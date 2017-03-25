@@ -20,10 +20,10 @@
 		ABCDCED61E83047D00450E8D /* READiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCED51E83047D00450E8D /* READiTests.swift */; };
 		ABCDCEE11E83047D00450E8D /* READiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEE01E83047D00450E8D /* READiUITests.swift */; };
 		ABCDCEF01E83049C00450E8D /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEEE1E83049C00450E8D /* Client.swift */; };
-		ABCDCEF11E83049C00450E8D /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEEF1E83049C00450E8D /* PostTableViewCell.swift */; };
+		ABCDCEF11E83049C00450E8D /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEEF1E83049C00450E8D /* ReportTableViewCell.swift */; };
 		ABCDCEF31E8304A700450E8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCDCEF21E8304A700450E8D /* Main.storyboard */; };
 		ABCDCEF51E83052A00450E8D /* NSStringHTMLDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEF41E83052A00450E8D /* NSStringHTMLDecoding.swift */; };
-		ABCDCEF71E83064000450E8D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEF61E83064000450E8D /* Post.swift */; };
+		ABCDCEF71E83064000450E8D /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDCEF61E83064000450E8D /* Report.swift */; };
 		ABF25A781E83148300E2105E /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,10 +64,10 @@
 		ABCDCEE01E83047D00450E8D /* READiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = READiUITests.swift; sourceTree = "<group>"; };
 		ABCDCEE21E83047E00450E8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABCDCEEE1E83049C00450E8D /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		ABCDCEEF1E83049C00450E8D /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		ABCDCEEF1E83049C00450E8D /* ReportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		ABCDCEF21E8304A700450E8D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		ABCDCEF41E83052A00450E8D /* NSStringHTMLDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringHTMLDecoding.swift; sourceTree = "<group>"; };
-		ABCDCEF61E83064000450E8D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		ABCDCEF61E83064000450E8D /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,10 +142,10 @@
 				ABAB4D8F1E847D470032179F /* RootViewController.swift */,
 				ABCDCEEE1E83049C00450E8D /* Client.swift */,
 				ABCDCEF41E83052A00450E8D /* NSStringHTMLDecoding.swift */,
-				ABCDCEF61E83064000450E8D /* Post.swift */,
+				ABCDCEF61E83064000450E8D /* Report.swift */,
 				ABCDCEC01E83047D00450E8D /* MasterViewController.swift */,
 				ABCDCEC21E83047D00450E8D /* DetailViewController.swift */,
-				ABCDCEEF1E83049C00450E8D /* PostTableViewCell.swift */,
+				ABCDCEEF1E83049C00450E8D /* ReportTableViewCell.swift */,
 				ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */,
 				AB1EC97C1E8355E000B895EF /* AuthenticationViewController.swift */,
 				ABCDCEF21E8304A700450E8D /* Main.storyboard */,
@@ -318,10 +318,10 @@
 				AB1EC97D1E8355E000B895EF /* AuthenticationViewController.swift in Sources */,
 				AB8026701E8702930042D757 /* WebSocket.swift in Sources */,
 				ABCDCEC11E83047D00450E8D /* MasterViewController.swift in Sources */,
-				ABCDCEF11E83049C00450E8D /* PostTableViewCell.swift in Sources */,
+				ABCDCEF11E83049C00450E8D /* ReportTableViewCell.swift in Sources */,
 				ABCDCEF01E83049C00450E8D /* Client.swift in Sources */,
 				ABCDCEBF1E83047D00450E8D /* AppDelegate.swift in Sources */,
-				ABCDCEF71E83064000450E8D /* Post.swift in Sources */,
+				ABCDCEF71E83064000450E8D /* Report.swift in Sources */,
 				ABF25A781E83148300E2105E /* LoadingTableViewCell.swift in Sources */,
 				ABCDCEF51E83052A00450E8D /* NSStringHTMLDecoding.swift in Sources */,
 			);

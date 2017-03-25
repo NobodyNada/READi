@@ -21,7 +21,7 @@ class DetailViewController: UIViewController {
 	
 	@IBAction func spamPressed(_ sender: Any) {
 		feedbackPressed(.spam)
-		post?.flag()
+		report?.flag()
 	}
 	@IBAction func vandalismPressed(_ sender: Any) {
 		feedbackPressed(.vandalism)
@@ -35,17 +35,17 @@ class DetailViewController: UIViewController {
 	}
 	
 	func feedbackPressed(_ type: Feedback) {
-		post?.send(feedback: type)
+		report?.send(feedback: type)
 	}
 	
 	
 	func updateFeedback(notification: NSNotification? = nil) {
-		guard let post = self.post else { return }
+		guard let report = self.report else { return }
 		
-		let spamCount = post.feedback?.filter { $0.type == .spam }.count ?? 0
-		let vandalismCount = post.feedback?.filter { $0.type == .vandalism }.count ?? 0
-		let naaCount = post.feedback?.filter { $0.type == .naa }.count ?? 0
-		let fpCount = post.feedback?.filter { $0.type == .fp }.count ?? 0
+		let spamCount = report.feedback?.filter { $0.type == .spam }.count ?? 0
+		let vandalismCount = report.feedback?.filter { $0.type == .vandalism }.count ?? 0
+		let naaCount = report.feedback?.filter { $0.type == .naa }.count ?? 0
+		let fpCount = report.feedback?.filter { $0.type == .fp }.count ?? 0
 		
 		let buttons: [(UIButton?, String, Int)] = [
 			(spamButton, "spam/rude", spamCount),
@@ -94,31 +94,31 @@ class DetailViewController: UIViewController {
 		naaButton?.tintColor = Feedback.naa.color
 		fpButton?.tintColor = Feedback.fp.color
 		
-		if let post = self.post {
-			title = post.title
-			bodyTextView?.text = post.body
-			reasonTextView?.text = post.why
+		if let report = self.report {
+			title = report.title
+			bodyTextView?.text = report.body
+			reasonTextView?.text = report.why
 			
 			
 			NotificationCenter.default.addObserver(
 				self,
 				selector: #selector(updateFeedback(notification:)),
-				name: Post.FeedbackUpdatedNotification,
-				object: post
+				name: Report.FeedbackUpdatedNotification,
+				object: report
 			)
 			
 			NotificationCenter.default.addObserver(
 				self,
 				selector: #selector(feedbackFailed(notification:)),
-				name: Post.FeedbackFailedNotification,
-				object: post
+				name: Report.FeedbackFailedNotification,
+				object: report
 			)
 			
 			NotificationCenter.default.addObserver(
 				self,
 				selector: #selector(flagFailed(notification:)),
-				name: Post.FlagFailedNotification,
-				object: post
+				name: Report.FlagFailedNotification,
+				object: report
 			)
 			
 			
@@ -137,7 +137,7 @@ class DetailViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	var post: Post? {
+	var report: Report? {
 		didSet {
 			// Update the view.
 			if let old = oldValue {

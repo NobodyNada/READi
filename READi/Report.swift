@@ -8,25 +8,25 @@
 
 import UIKit
 
-class Post: CustomStringConvertible {
+class Report: CustomStringConvertible {
 	var id: Int!	//The MS ID, not the SE ID!
 	var title: String!
 	var body: String!
 	var why: String!
 	var link: String!
-	var feedback: [PostFeedback]!
+	var feedback: [ReportFeedback]!
 	
-	static let FeedbackUpdatedNotification = Notification.Name("READi.Post.FeedbackUpdatedNotification")
-	static let FeedbackFailedNotification = Notification.Name("READi.Post.FeedbackFailedNotification")
-	static let FlagFailedNotification = Notification.Name("READi.Post.FlagFailedNotification")
+	static let FeedbackUpdatedNotification = Notification.Name("READi.Report.FeedbackUpdatedNotification")
+	static let FeedbackFailedNotification = Notification.Name("READi.Report.FeedbackFailedNotification")
+	static let FlagFailedNotification = Notification.Name("READi.Reportt.FlagFailedNotification")
 	
 	func postFeedbackNotification() {
 		DispatchQueue.main.async {
-			NotificationCenter.default.post(Notification(name: Post.FeedbackUpdatedNotification, object: self, userInfo: nil))
+			NotificationCenter.default.post(Notification(name: Report.FeedbackUpdatedNotification, object: self, userInfo: nil))
 		}
 	}
 	
-	class PostFeedback {
+	class ReportFeedback {
 		var id: Int!
 		var username: String!
 		var type: Feedback!
@@ -55,11 +55,11 @@ class Post: CustomStringConvertible {
 			}
 		}
 		
-		class func from(json: [[String:Any]]) -> [PostFeedback] {
-			return json.map { PostFeedback(json: $0) }
+		class func from(json: [[String:Any]]) -> [ReportFeedback] {
+			return json.map { ReportFeedback(json: $0) }
 		}
 		
-		class func from(json: [String:Any]) -> [PostFeedback] {
+		class func from(json: [String:Any]) -> [ReportFeedback] {
 			return from(json: (json["items"] as? [[String:Any]]) ?? [])
 		}
 	}
@@ -93,15 +93,15 @@ class Post: CustomStringConvertible {
 			return
 		}
 		
-		feedback = PostFeedback.from(json: json)
+		feedback = ReportFeedback.from(json: json)
 	}
 	
-	class func from(json: [String:Any]) -> [Post] {
-		return (json["items"] as? [[String:Any]])?.map { Post(json: $0) } ?? []
+	class func from(json: [String:Any]) -> [Report] {
+		return (json["items"] as? [[String:Any]])?.map { Report(json: $0) } ?? []
 	}
 	
 	
-	enum PostError: Error {
+	enum ReportError: Error {
 		case feedbackFailed(details: String?)
 		case spamFlagFailed(details: String?)
 	}
@@ -123,22 +123,22 @@ class Post: CustomStringConvertible {
 					
 					if let errorDetails = json as? [String:Any] {
 						print(errorDetails)
-						throw PostError.feedbackFailed(details: errorDetails["error_message"] as? String)
+						throw ReportError.feedbackFailed(details: errorDetails["error_message"] as? String)
 					}
 					
 					guard let feedbacks = json as? [[String:Any]] else {
 						print("Could not parse feedback!")
-						throw PostError.feedbackFailed(details: nil)
+						throw ReportError.feedbackFailed(details: nil)
 					}
 					
 					
-					self.feedback = PostFeedback.from(json: feedbacks)
+					self.feedback = ReportFeedback.from(json: feedbacks)
 					self.postFeedbackNotification()
-				} catch PostError.feedbackFailed(let details) {
+				} catch ReportError.feedbackFailed(let details) {
 					print("Could not send feedback!")
 					DispatchQueue.main.async {
 						NotificationCenter.default.post(
-							name: Post.FeedbackFailedNotification,
+							name: Report.FeedbackFailedNotification,
 							object: self,
 							userInfo: ["errorDetails":details as Any]
 						)
@@ -147,7 +147,7 @@ class Post: CustomStringConvertible {
 					print("Could not send feedback!")
 					DispatchQueue.main.async {
 						NotificationCenter.default.post(
-							name: Post.FeedbackFailedNotification,
+							name: Report.FeedbackFailedNotification,
 							object: self
 						)
 					}
@@ -174,20 +174,20 @@ class Post: CustomStringConvertible {
 							]
 						)
 					) as? [String:Any] else {
-							throw PostError.spamFlagFailed(details: nil)
+							throw ReportError.spamFlagFailed(details: nil)
 					}
 					
 					if response["status"] as? String == "failed" {
-						throw PostError.spamFlagFailed(details: response["message"] as? String)
+						throw ReportError.spamFlagFailed(details: response["message"] as? String)
 					}
 					
 					print(response)
 					
-				} catch PostError.spamFlagFailed(let details) {
+				} catch ReportError.spamFlagFailed(let details) {
 					print("Failed to flag as spam!")
 					DispatchQueue.main.async {
 						NotificationCenter.default.post(
-							name: Post.FlagFailedNotification,
+							name: Report.FlagFailedNotification,
 							object: self,
 							userInfo: ["errorDetails":details as Any]
 						)
@@ -196,7 +196,7 @@ class Post: CustomStringConvertible {
 					print("Failed to flag as spam!")
 					DispatchQueue.main.async {
 						NotificationCenter.default.post(
-							name: Post.FlagFailedNotification,
+							name: Report.FlagFailedNotification,
 							object: self
 						)
 					}

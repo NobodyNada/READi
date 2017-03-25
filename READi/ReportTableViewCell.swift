@@ -1,5 +1,5 @@
 //
-//  PostTableViewCell.swift
+//  ReportTableViewCell.swift
 //  READY
 //
 //  Created by NobodyNada on 3/21/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+class ReportTableViewCell: UITableViewCell {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var bodyLabel: UILabel!
 	
@@ -19,10 +19,10 @@ class PostTableViewCell: UITableViewCell {
 	
 	
 	func updateFeedback(notification: NSNotification? = nil) {
-		let spamCount = post.feedback?.filter { $0.type == .spam }.count ?? 0
-		let vandalismCount = post.feedback?.filter { $0.type == .vandalism }.count ?? 0
-		let naaCount = post.feedback?.filter { $0.type == .naa }.count ?? 0
-		let fpCount = post.feedback?.filter { $0.type == .fp }.count ?? 0
+		let spamCount = report.feedback?.filter { $0.type == .spam }.count ?? 0
+		let vandalismCount = report.feedback?.filter { $0.type == .vandalism }.count ?? 0
+		let naaCount = report.feedback?.filter { $0.type == .naa }.count ?? 0
+		let fpCount = report.feedback?.filter { $0.type == .fp }.count ?? 0
 		
 		let buttons = [
 			(spamButton!, "spam/rude", spamCount),
@@ -45,9 +45,9 @@ class PostTableViewCell: UITableViewCell {
 	}
 	
 	
-	var post: Post! {
+	var report: Report! {
 		didSet {
-			guard post != nil else { return }
+			guard report != nil else { return }
 			
 			if let old = oldValue {
 				NotificationCenter.default.removeObserver(self, name: nil, object: old)
@@ -56,13 +56,13 @@ class PostTableViewCell: UITableViewCell {
 			NotificationCenter.default.addObserver(
 				self,
 				selector: #selector(updateFeedback(notification:)),
-				name: Post.FeedbackUpdatedNotification,
-				object: post
+				name: Report.FeedbackUpdatedNotification,
+				object: report
 			)
 			
-			titleLabel.text = post.title
+			titleLabel.text = report.title
 			
-			let htmlData = (post.body +
+			let htmlData = (report.body +
 				"<style>* {font-family: -apple-system; font-size: \(bodyLabel.font.pointSize)px;}</style>"
 				).data(using: .utf8)!
 			
@@ -73,7 +73,7 @@ class PostTableViewCell: UITableViewCell {
 					NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue
 					],
 				documentAttributes: nil
-			)) ?? NSAttributedString(string: post.body)
+			)) ?? NSAttributedString(string: report.body)
 			
 			updateFeedback()
 			
@@ -82,12 +82,12 @@ class PostTableViewCell: UITableViewCell {
 	}
 	
 	func feedbackPressed(_ type: Feedback) {
-		post.send(feedback: type)
+		report.send(feedback: type)
 	}
 	
 	@IBAction func spamPressed(_ sender: Any) {
 		feedbackPressed(.spam)
-		post?.flag()
+		report?.flag()
 	}
 	@IBAction func vandalismPressed(_ sender: Any) {
 		feedbackPressed(.vandalism)

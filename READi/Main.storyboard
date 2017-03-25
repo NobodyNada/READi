@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-46" y="-757"/>
         </scene>
-        <!--Post-->
+        <!--Report-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
-                <viewController title="Post" automaticallyAdjustsScrollViewInsets="NO" id="JEX-9P-axG" customClass="DetailViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Report" automaticallyAdjustsScrollViewInsets="NO" id="JEX-9P-axG" customClass="DetailViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SYR-Wa-9uf"/>
                         <viewControllerLayoutGuide type="bottom" id="GAO-Cl-Wes"/>
@@ -154,7 +154,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Post" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Report" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="bodyTextView" destination="Ej9-i1-2Hv" id="cLN-hf-rAW"/>
                         <outlet property="fpButton" destination="GVs-ak-chk" id="1yf-Ft-OaG"/>
@@ -258,16 +258,16 @@
             </objects>
             <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
-        <!--Posts-->
+        <!--Reports-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="Posts" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Reports" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="380" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.91115935643514001" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostTableViewCell" rowHeight="321" id="WCw-Qf-5nD" customClass="PostTableViewCell" customModule="READi" customModuleProvider="target">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReportTableViewCell" rowHeight="321" id="WCw-Qf-5nD" customClass="ReportTableViewCell" customModule="READi" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="375" height="321"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
@@ -278,44 +278,44 @@
                                             <rect key="frame" x="8" y="8" width="359" height="305"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Df0-8P-j3q">
-                                                    <rect key="frame" x="8" y="73.5" width="343" height="223.5"/>
+                                                    <rect key="frame" x="8" y="73" width="343" height="224"/>
                                                     <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fj-ZZ-feq">
-                                                    <rect key="frame" x="8" y="8" width="343" height="26.5"/>
+                                                    <rect key="frame" x="8" y="8" width="343" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9C3-Tc-CJK">
-                                                    <rect key="frame" x="8" y="34.5" width="343" height="39"/>
+                                                    <rect key="frame" x="8" y="35" width="343" height="38"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcI-KT-CfD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="125" height="39"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
                                                             <state key="normal" title="spam/rude"/>
                                                             <connections>
                                                                 <action selector="spamPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="iGf-1i-Z3x"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85p-zQ-4lI">
-                                                            <rect key="frame" x="125" y="0.0" width="116.5" height="39"/>
+                                                            <rect key="frame" x="125" y="0.0" width="117" height="38"/>
                                                             <state key="normal" title="vandalism"/>
                                                             <connections>
                                                                 <action selector="vandalismPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Zas-Gp-2ev"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-34-Jas">
-                                                            <rect key="frame" x="241.5" y="0.0" width="51" height="39"/>
+                                                            <rect key="frame" x="242" y="0.0" width="50" height="38"/>
                                                             <state key="normal" title="naa"/>
                                                             <connections>
                                                                 <action selector="naaPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="kZY-ZV-hsY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-nh-jMb">
-                                                            <rect key="frame" x="292.5" y="0.0" width="50.5" height="39"/>
+                                                            <rect key="frame" x="292" y="0.0" width="51" height="38"/>
                                                             <state key="normal" title="fp"/>
                                                             <connections>
                                                                 <action selector="fpPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="vQG-h7-Pig"/>
@@ -385,7 +385,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Posts" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Reports" id="Zdf-7t-Un8"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="5Zf-3L-cD0">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>

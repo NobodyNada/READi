@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 	var detailViewController: DetailViewController? = nil
-	var cachedPosts = [Post]()
+	var cachedReports = [Report]()
 	
 	var ws = WebSocket("wss://metasmoke.erwaysoftware.com/cable")
 	private var lastMessage: Date = Date()
@@ -89,9 +89,9 @@ class MasterViewController: UITableViewController {
 	func received(feedback: [String:String]) {
 		DispatchQueue.global().async {
 			do {
-				let indices = self.cachedPosts.indices.filter { self.cachedPosts[$0].link == feedback["post_link"] }
+				let indices = self.cachedReports.indices.filter { self.cachedReports[$0].link == feedback["post_link"] }
 				for index in indices {
-					try self.cachedPosts[index].fetchFeedback(client: client)
+					try self.cachedReports[index].fetchFeedback(client: client)
 				}
 				
 				DispatchQueue.main.async {
@@ -122,13 +122,13 @@ class MasterViewController: UITableViewController {
 		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(feedbackFailed(notification:)),
-			name: Post.FeedbackFailedNotification,
+			name: Report.FeedbackFailedNotification,
 			object: nil
 		)
 		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(flagFailed(notification:)),
-			name: Post.FlagFailedNotification,
+			name: Report.FlagFailedNotification,
 			object: nil
 		)
 		
@@ -158,7 +158,7 @@ class MasterViewController: UITableViewController {
 		print("Refreshing!")
 		DispatchQueue.global().async {
 			do {
-				self.cachedPosts = try self.fetchPosts(page: 1, pageSize: 10)
+				self.cachedReports = try self.fetchPosts(page: 1, pageSize: 10)
 			} catch {
 				print(error)
 				self.alert("Failed to refresh!")
@@ -176,9 +176,9 @@ class MasterViewController: UITableViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 			if let indexPath = self.tableView.indexPathForSelectedRow {
-				let object = cachedPosts[indexPath.row]
+				let object = cachedReports[indexPath.row]
 				let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-				controller.post = object
+				controller.report = object
 				controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
 				controller.navigationItem.leftItemsSupplementBackButton = true
 			}
@@ -192,7 +192,7 @@ class MasterViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return cachedPosts.count + 1
+		return cachedReports.count + 1
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -200,14 +200,14 @@ class MasterViewController: UITableViewController {
 		
 		let row = indexPath.row
 		
-		if row == cachedPosts.count {
+		if row == cachedReports.count {
 			cell = tableView.dequeueReusableCell(withIdentifier: "LoadingTableViewCell", for: indexPath)
 			fetchPosts(start: row)
 		} else {
-			cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+			cell = tableView.dequeueReusableCell(withIdentifier: "ReportTableViewCell", for: indexPath) as! ReportTableViewCell
 			
-			let postCell = cell as! PostTableViewCell
-			postCell.post = cachedPosts[row]
+			let postCell = cell as! ReportTableViewCell
+			postCell.report = cachedReports[row]
 		}
 		
 		return cell
@@ -220,7 +220,7 @@ class MasterViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			cachedPosts.remove(at: indexPath.row)
+			cachedReports.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .fade)
 		} else if editingStyle == .insert {
 			// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -236,7 +236,7 @@ class MasterViewController: UITableViewController {
 	
 	///MARK: Metasmoke API
 	
-	func fetchPosts(page: Int, pageSize: Int) throws -> [Post] {
+	func fetchPosts(page: Int, pageSize: Int) throws -> [Report] {
 		let response: String = try client.get(
 			"https://metasmoke.erwaysoftware.com/api/posts/between" +
 				"?from_date=0&to_date=\(Int(Date().timeIntervalSince1970))" +
@@ -247,7 +247,7 @@ class MasterViewController: UITableViewController {
 			return []
 		}
 		
-		return Post.from(json: json)
+		return Report.from(json: json)
 	}
 	
 	func fetchPosts(start: Int) {
@@ -266,7 +266,7 @@ class MasterViewController: UITableViewController {
 				print(posts)
 				
 				DispatchQueue.main.sync {
-					self.cachedPosts.insert(contentsOf: posts, at: start)
+					self.cachedReports.insert(contentsOf: posts, at: start)
 					self.tableView.insertRows(
 						at: posts.indices.map { IndexPath(row: start + $0, section: 0) },
 						with: .automatic
@@ -278,7 +278,7 @@ class MasterViewController: UITableViewController {
 						do {
 							try post.fetchFeedback(client: client)
 							
-							guard let index = self.cachedPosts.index(where: { post.id == $0.id }) else {
+							guard let index = self.cachedReports.index(where: { post.id == $0.id }) else {
 								return
 							}
 							let indexPath = IndexPath(row: index, section: 0)
