@@ -81,7 +81,7 @@ class Report: CustomStringConvertible {
 		return title ?? "<no title>"
 	}
 	
-	func fetchFeedback(client: APIClient) throws {
+	func fetchFeedback(client: Client) throws {
 		guard id != nil else { return }
 		
 		let response: String = try client.get(
@@ -112,8 +112,8 @@ class Report: CustomStringConvertible {
 			
 			DispatchQueue.global(qos: .background).async {
 				do {
-					let response: String = try client.post("https://metasmoke.erwaysoftware.com/api/w/post/\(self.id!)/feedback", fields: [
-						"key":client.metasmokeKey,
+					let response: String = try client.post("https://metasmoke.erwaysoftware.com/api/w/post/\(self.id!)/feedback", [
+						"key":client.key,
 						"token":token,
 						"type":feedback.identifier
 						]
@@ -168,8 +168,8 @@ class Report: CustomStringConvertible {
 			DispatchQueue.global(qos: .background).async {
 				do {
 					guard let response = try client.parseJSON(
-						client.post("https://metasmoke.erwaysoftware.com/api/w/post/\(self.id!)/spam_flag", fields: [
-							"key":client.metasmokeKey,
+						client.post("https://metasmoke.erwaysoftware.com/api/w/post/\(self.id!)/spam_flag", [
+							"key":client.key,
 							"token":token
 							]
 						)
