@@ -165,6 +165,29 @@ class MasterViewController: UITableViewController {
 				self.alert("Failed to refresh!")
 			}
 			
+			for report in self.cachedReports {
+				DispatchQueue.global().async {
+					report.renderAttributedText()
+				}
+				
+				client.queue.async {
+					do {
+						try report.fetchFeedback(client: client)
+						
+						guard let index = self.cachedReports.index(where: { report.id == $0.id }) else {
+							return
+						}
+						let indexPath = IndexPath(row: index, section: 0)
+						
+						DispatchQueue.main.sync {
+							self.tableView.reloadRows(at: [indexPath], with: .automatic)
+						}
+					} catch {
+						print(error)
+					}
+				}
+			}
+			
 			DispatchQueue.main.async {
 				self.tableView.reloadData()
 				self.refreshControl?.endRefreshing()

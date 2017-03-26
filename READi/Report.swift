@@ -20,6 +20,7 @@ class Report: CustomStringConvertible {
 	//Use a dispatch queue to serialize access to the attributed body.
 	private var attributedBodyQueue = DispatchQueue(label: "Attributed Body")
 	private var _attributedBody: NSAttributedString?
+	private var isRenderingAttributedText = false
 	
 	var attributedBody: NSAttributedString? {
 		get {
@@ -178,6 +179,9 @@ class Report: CustomStringConvertible {
 	}
 	
 	func renderAttributedText() {
+		if isRenderingAttributedText || _attributedBody != nil {
+			return
+		}
 		attributedBodyQueue.sync {
 			self._attributedBody = NSAttributedString(
 				htmlData: self.body.data(using: .utf8)!,
