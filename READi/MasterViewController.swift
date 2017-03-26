@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftWebSocket
 
 class MasterViewController: UITableViewController {
 	var detailViewController: DetailViewController? = nil
@@ -207,6 +208,9 @@ class MasterViewController: UITableViewController {
 			cell = tableView.dequeueReusableCell(withIdentifier: "ReportTableViewCell", for: indexPath) as! ReportTableViewCell
 			
 			let postCell = cell as! ReportTableViewCell
+			if cachedReports[row].attributedBody == nil {
+				cachedReports[row].renderAttributedText()
+			}
 			postCell.report = cachedReports[row]
 		}
 		
@@ -274,8 +278,13 @@ class MasterViewController: UITableViewController {
 				}
 				
 				for post in posts {
+					DispatchQueue.global().async {
+						post.renderAttributedText()
+					}
+					
 					client.queue.async {
 						do {
+							
 							try post.fetchFeedback(client: client)
 							
 							guard let index = self.cachedReports.index(where: { post.id == $0.id }) else {

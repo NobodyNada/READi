@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DTCoreText
 
 class Report: CustomStringConvertible {
 	var id: Int!	//The MS ID, not the SE ID!
@@ -15,6 +16,25 @@ class Report: CustomStringConvertible {
 	var why: String!
 	var link: String!
 	var feedback: [ReportFeedback]!
+	
+	//Use a dispatch queue to serialize access to the attributed body.
+	private var attributedBodyQueue = DispatchQueue(label: "Attributed Body")
+	private var _attributedBody: NSAttributedString?
+	
+	var attributedBody: NSAttributedString? {
+		get {
+			var result: NSAttributedString?
+			attributedBodyQueue.sync {
+				result = _attributedBody
+			}
+			return result
+		} set {
+			attributedBodyQueue.sync {
+				_attributedBody = newValue
+			}
+		}
+	}
+	
 	
 	static let FeedbackUpdatedNotification = Notification.Name("READi.Report.FeedbackUpdatedNotification")
 	static let FeedbackFailedNotification = Notification.Name("READi.Report.FeedbackFailedNotification")
@@ -157,6 +177,20 @@ class Report: CustomStringConvertible {
 		
 	}
 	
+	func renderAttributedText() {
+		attributedBodyQueue.sync {
+			self._attributedBody = NSAttributedString(
+				htmlData: self.body.data(using: .utf8)!,
+				options: [
+					DTDefaultFontFamily:UIFont.systemFont(ofSize: UIFont.systemFontSize).familyName,
+					DTDefaultFontSize:17.0,
+					DTUseiOS6Attributes:true
+				],
+				documentAttributes: nil
+			)
+		}
+	}
+	
 	
 	
 	//Flags a post as spam.
@@ -173,7 +207,7 @@ class Report: CustomStringConvertible {
 							"token":token
 							]
 						)
-					) as? [String:Any] else {
+						) as? [String:Any] else {
 							throw ReportError.spamFlagFailed(details: nil)
 					}
 					

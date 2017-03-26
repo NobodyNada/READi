@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DTCoreText
 
-class ReportTableViewCell: UITableViewCell {
+class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var bodyLabel: UILabel!
 	
@@ -44,6 +45,12 @@ class ReportTableViewCell: UITableViewCell {
 		}
 	}
 	
+	override func layoutSubviews() {
+		bodyLabel.sizeToFit()
+		//self.sizeToFit()
+		
+		super.layoutSubviews()
+	}
 	
 	var report: Report! {
 		didSet {
@@ -62,22 +69,13 @@ class ReportTableViewCell: UITableViewCell {
 			
 			titleLabel.text = report.title
 			
-			let htmlData = (report.body +
-				"<style>* {font-family: -apple-system; font-size: \(bodyLabel.font.pointSize)px;}</style>"
-				).data(using: .utf8)!
-			
-			bodyLabel.attributedText = (try? NSAttributedString(
-				data: htmlData,
-				options: [
-					NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
-					NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue
-					],
-				documentAttributes: nil
-			)) ?? NSAttributedString(string: report.body)
-			
+			//draw the plain text temporarily while rendering the HTML asynchronously
+			if let text = report.attributedBody {
+				bodyLabel.attributedText = text
+			} else {
+				bodyLabel.text = report.body
+			}
 			updateFeedback()
-			
-			layoutSubviews()
 		}
 	}
 	
@@ -109,6 +107,8 @@ class ReportTableViewCell: UITableViewCell {
 		vandalismButton.tintColor = Feedback.vandalism.color
 		naaButton.tintColor = Feedback.naa.color
 		fpButton.tintColor = Feedback.fp.color
+		
+		//bodyLabel.delegate = self
 	}
 	
 	override func draw(_ rect: CGRect) {

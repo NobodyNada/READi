@@ -1,0 +1,3 @@
+github "tidwall/SwiftWebSocket"
+github "Cocoanetics/DTCoreText"
+github "Cocoanetics/DTFoundation"

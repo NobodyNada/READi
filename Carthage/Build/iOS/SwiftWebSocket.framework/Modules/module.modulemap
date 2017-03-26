@@ -1,0 +1,10 @@
+framework module SwiftWebSocket {
+  umbrella header "SwiftWebSocket.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftWebSocket.Swift {
+    header "SwiftWebSocket-Swift.h"
+}
