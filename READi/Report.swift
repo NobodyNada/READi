@@ -183,8 +183,9 @@ class Report: CustomStringConvertible {
 			return
 		}
 		attributedBodyQueue.sync {
-			self._attributedBody = NSAttributedString(
-				htmlData: self.body.data(using: .utf8)!,
+			let html = self.body + "<style>img { width: 100%; }</style>"
+			self._attributedBody = NSMutableAttributedString(
+				htmlData: html.data(using: .utf8)!,
 				options: [
 					DTDefaultFontFamily:UIFont.systemFont(ofSize: UIFont.systemFontSize).familyName,
 					DTDefaultFontSize:17.0,
@@ -192,6 +193,15 @@ class Report: CustomStringConvertible {
 				],
 				documentAttributes: nil
 			)
+			if let body = self._attributedBody as? NSMutableAttributedString {
+				body.enumerateAttributes(in: NSRange(0..<body.length)) {attributes, range, stop in
+					if let attachment = attributes[NSAttachmentAttributeName] as? DTImageTextAttachment {
+						let newAttachment = GasMaskTextAttachment()
+						newAttachment.imageURL = attachment.contentURL
+						body.setAttributes([NSAttachmentAttributeName:newAttachment], range: range)
+					}
+				}
+			}
 		}
 	}
 	

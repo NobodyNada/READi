@@ -118,7 +118,7 @@ class MasterViewController: UITableViewController {
 			
 		}
 		
-		
+		tableView.translatesAutoresizingMaskIntoConstraints = false
 		
 		NotificationCenter.default.addObserver(
 			self,
@@ -235,7 +235,10 @@ class MasterViewController: UITableViewController {
 				cachedReports[row].renderAttributedText()
 			}
 			postCell.report = cachedReports[row]
+			postCell.tableView = tableView
 		}
+		
+		cell.layoutIfNeeded()
 		
 		return cell
 	}
@@ -266,7 +269,7 @@ class MasterViewController: UITableViewController {
 	func fetchPosts(page: Int, pageSize: Int) throws -> [Report] {
 		let response: String = try client.get(
 			"https://metasmoke.erwaysoftware.com/api/posts/between" +
-				"?from_date=0&to_date=\(Int(Date().timeIntervalSince1970))" +
+				"?from_date=0&to_date=\(Int(1490518920))" +
 			"&per_page=\(pageSize)&page=\(page)&key=\(client.key)"
 		)
 		

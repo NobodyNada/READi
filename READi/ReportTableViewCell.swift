@@ -18,6 +18,13 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 	@IBOutlet weak var naaButton: UIButton!
 	@IBOutlet weak var fpButton: UIButton!
 	
+	var tableView: UITableView!
+	
+	private var textStorage: NSTextStorage!
+	private var textContainer: NSTextContainer!
+	var textLayoutManager: NSLayoutManager!
+	
+	private var needsResize = false
 	
 	func updateFeedback(notification: NSNotification? = nil) {
 		let spamCount = report.feedback?.filter { $0.type == .spam }.count ?? 0
@@ -45,11 +52,38 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 		}
 	}
 	
+	func layoutFinished() {
+		guard needsResize else { return }
+		needsResize = false
+		
+		if textLayoutManager != nil {
+			while !textLayoutManager.textContainers.isEmpty {
+				textLayoutManager.removeTextContainer(at: 0)
+			}
+			
+			textContainer = NSTextContainer(size: bodyLabel.bounds.size)
+			textContainer.lineFragmentPadding = 0
+			textContainer.maximumNumberOfLines = bodyLabel.numberOfLines
+			textContainer.lineBreakMode = bodyLabel.lineBreakMode
+			
+			textLayoutManager.addTextContainer(textContainer)
+		}
+		
+		if let body = report.attributedBody {
+			body.enumerateAttributes(in: NSRange(0..<body.length)) {attributes, range, stop in
+				if let attachment = attributes[NSAttachmentAttributeName] as? GasMaskTextAttachment {
+					attachment.width = self.bodyLabel.bounds.width
+				}
+			}
+		}
+	}
+	
 	override func layoutSubviews() {
 		bodyLabel.sizeToFit()
-		//self.sizeToFit()
 		
 		super.layoutSubviews()
+		
+		needsResize = true
 	}
 	
 	var report: Report! {
@@ -72,9 +106,13 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 			//draw the plain text temporarily while rendering the HTML asynchronously
 			if let text = report.attributedBody {
 				bodyLabel.attributedText = text
+				textStorage = NSTextStorage(attributedString: text)
+				textLayoutManager = NSLayoutManager()
+				textStorage.addLayoutManager(textLayoutManager)
 			} else {
 				bodyLabel.text = report.body
 			}
+			
 			updateFeedback()
 		}
 	}
@@ -98,6 +136,91 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 		feedbackPressed(.fp)
 	}
 	
+	//MARK: - Touch management
+	
+	private func clickableElement(at touch: UITouch) -> GasMaskTextAttachment? {
+		let location = touch.location(in: bodyLabel)
+		let tappedIndex = textLayoutManager.characterIndex(
+			for: location,
+			in: textContainer,
+			fractionOfDistanceBetweenInsertionPoints: nil
+		)
+		
+		var result: GasMaskTextAttachment?
+		
+		bodyLabel.attributedText?.enumerateAttributes(in: NSRange(location: tappedIndex, length: 1)) {attrs, range, stop in
+			if let attachment = attrs[NSAttachmentAttributeName] as? GasMaskTextAttachment? {
+				result = attachment
+				stop.pointee = true
+			}
+		}
+		
+		return result
+	}
+	
+	private var trackedTouches = [UITouch]()
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		var untrackedTouches = Set<UITouch>()
+		
+		for touch in touches {
+			if bodyLabel.bounds.contains(touch.location(in: bodyLabel)) && clickableElement(at: touch) != nil {
+				trackedTouches.append(touch)
+			} else {
+				untrackedTouches.insert(touch)
+			}
+		}
+		
+		if !untrackedTouches.isEmpty {
+			super.touchesBegan(untrackedTouches, with: event)
+		}
+	}
+	
+	
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+		var untrackedTouches = Set<UITouch>()
+		
+		for touch in touches {
+			if trackedTouches.contains(touch) {
+				trackedTouches.remove(at: trackedTouches.index(of: touch)!)
+				
+				if bodyLabel.bounds.contains(touch.location(in: bodyLabel)), let image = clickableElement(at: touch) {
+					image.tapped()
+					bodyLabel.invalidateIntrinsicContentSize()
+					layoutSubviews()
+					layoutIfNeeded()
+					tableView.beginUpdates()
+					tableView.endUpdates()
+				}
+			} else {
+				untrackedTouches.insert(touch)
+			}
+		}
+		
+		if !untrackedTouches.isEmpty {
+			super.touchesEnded(untrackedTouches, with: event)
+		}
+	}
+	
+	override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+		var untrackedTouches = Set<UITouch>()
+		
+		for touch in touches {
+			if trackedTouches.contains(touch) {
+				trackedTouches.remove(at: trackedTouches.index(of: touch)!)
+			} else {
+				untrackedTouches.insert(touch)
+			}
+		}
+		
+		if !untrackedTouches.isEmpty {
+			super.touchesCancelled(untrackedTouches, with: event)
+		}
+	}
+	
+	
+	
+	
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -108,11 +231,14 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 		naaButton.tintColor = Feedback.naa.color
 		fpButton.tintColor = Feedback.fp.color
 		
+		
+		
 		//bodyLabel.delegate = self
 	}
 	
 	override func draw(_ rect: CGRect) {
 		super.draw(rect)
+		layoutFinished()
 	}
 	
 	override func setSelected(_ selected: Bool, animated: Bool) {
