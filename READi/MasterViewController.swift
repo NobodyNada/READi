@@ -269,7 +269,7 @@ class MasterViewController: UITableViewController {
 	func fetchPosts(page: Int, pageSize: Int) throws -> [Report] {
 		let response: String = try client.get(
 			"https://metasmoke.erwaysoftware.com/api/posts/between" +
-				"?from_date=0&to_date=\(Int(1490518920))" +
+				"?from_date=0&to_date=\(Int(Date().timeIntervalSince1970))" +
 			"&per_page=\(pageSize)&page=\(page)&key=\(client.key)"
 		)
 		
