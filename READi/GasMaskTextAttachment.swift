@@ -9,7 +9,10 @@
 import UIKit
 
 class GasMaskTextAttachment: NSTextAttachment {
-	static let gasMaskImage = UIImage(named: "gas_mask.png")!
+	func getGasMaskImage() -> UIImage {
+		return UIImage(named: "gas_mask.png")!
+	}
+	
 	var actualImage: UIImage?
 	var width: CGFloat? {
 		didSet {
@@ -25,7 +28,7 @@ class GasMaskTextAttachment: NSTextAttachment {
 	
 	var imageURL: URL? {
 		didSet {
-			self.image = GasMaskTextAttachment.gasMaskImage
+			self.image = getGasMaskImage()
 			guard let url = imageURL else { return }
 			DispatchQueue.global().async {
 				self.actualImage = (try? Data(contentsOf: url)).map { UIImage(data: $0) } ?? nil
@@ -36,7 +39,7 @@ class GasMaskTextAttachment: NSTextAttachment {
 	func tapped() {
 		if actualImage != nil {
 			if image == actualImage {
-				image = GasMaskTextAttachment.gasMaskImage
+				image = getGasMaskImage()
 			} else {
 				image = actualImage
 			}

@@ -13,7 +13,8 @@ class MasterViewController: UITableViewController {
 	var detailViewController: DetailViewController? = nil
 	var cachedReports = [Report]()
 	
-	var ws = WebSocket("wss://metasmoke.erwaysoftware.com/cable")
+	var ws = WebSocket()
+	private var wsShouldClose = false
 	private var lastMessage: Date = Date()
 	private var messageTimer: Timer!
 	
@@ -43,6 +44,9 @@ class MasterViewController: UITableViewController {
 	}
 	
 	func closeWebsocket() {
+		wsShouldClose = true
+		messageTimer.invalidate()
+		messageTimer = nil
 		ws.close()
 	}
 	
@@ -64,8 +68,10 @@ class MasterViewController: UITableViewController {
 			)
 		}
 		ws.event.close = {code, reason, clean in
-			if !clean {
+			print("Websocket closed.")
+			if !clean && !self.wsShouldClose {
 				//attempt to reopen the websocket
+				print("Reopening websocket.")
 				self.openWebsocket()
 			}
 		}
@@ -80,12 +86,25 @@ class MasterViewController: UITableViewController {
 			
 			if let feedback = message["feedback"] as? [String:String] {
 				self.received(feedback: feedback)
+			} else if let report = message["not_flagged"] as? [String:Any] {
+				self.received(report: report)
+			} else if let report = message["flagged"] as? [String:Any] {
+				self.received(report: report)
 			}
 		}
 		
 		
-		ws.open()
+		wsShouldClose = false
+		ws.open("wss://metasmoke.erwaysoftware.com/cable")
 	}
+	
+	func received(report: [String:Any]) {
+		DispatchQueue.main.async {
+			self.cachedReports.insert(Report(json: report), at: 0)
+			self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+		}
+	}
+	
 	
 	func received(feedback: [String:String]) {
 		DispatchQueue.global().async {
@@ -130,6 +149,20 @@ class MasterViewController: UITableViewController {
 			self,
 			selector: #selector(flagFailed(notification:)),
 			name: Report.FlagFailedNotification,
+			object: nil
+		)
+		
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(closeWebsocket),
+			name: AppDelegate.didEnterBackground,
+			object: nil
+		)
+		
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(openWebsocket),
+			name: AppDelegate.willEnterForeground,
 			object: nil
 		)
 		

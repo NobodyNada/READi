@@ -59,6 +59,9 @@ let metasmokeFilter = "%00%00%00%00%C2%BF%C2%88%00%03%C3%BF%C3%BF%C2%80%07%C3%80
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+	static let didEnterBackground: Notification.Name = Notification.Name("READi.AppDelegate.didEnterBackground")
+	static let willEnterForeground: Notification.Name = Notification.Name("READi.AppDelegate.willEnterForeground")
+	
 	var application: UIApplication!
 	
 	var window: UIWindow?
@@ -104,10 +107,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 	func applicationDidEnterBackground(_ application: UIApplication) {
 		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+		
+		NotificationCenter.default.post(name: AppDelegate.didEnterBackground, object: self)
 	}
 	
 	func applicationWillEnterForeground(_ application: UIApplication) {
 		// Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+		
+		NotificationCenter.default.post(name: AppDelegate.willEnterForeground, object: self)
 	}
 	
 	func applicationDidBecomeActive(_ application: UIApplication) {
