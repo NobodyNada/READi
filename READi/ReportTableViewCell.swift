@@ -138,7 +138,14 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 	
 	//MARK: - Touch management
 	
-	private func clickableElement(at touch: UITouch) -> GasMaskTextAttachment? {
+	private enum ClickableElement {
+		case gasMask(attachment: GasMaskTextAttachment)
+		case link(target: URL)
+	}
+	
+	///Returns an array of clickable elements at the touch.
+	private func clickableElements(at touch: UITouch) -> [ClickableElement] {
+		//Get the character which was tapped.
 		let location = touch.location(in: bodyLabel)
 		let tappedIndex = textLayoutManager.characterIndex(
 			for: location,
@@ -146,17 +153,29 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 			fractionOfDistanceBetweenInsertionPoints: nil
 		)
 		
-		var result: GasMaskTextAttachment?
+		
+		//Add all clickable elements to the list.
+		var results = [ClickableElement]()
 		
 		bodyLabel.attributedText?.enumerateAttributes(in: NSRange(location: tappedIndex, length: 1)) {attrs, range, stop in
-			if let attachment = attrs[NSAttachmentAttributeName] as? GasMaskTextAttachment? {
-				result = attachment
-				stop.pointee = true
+			for (key, value) in attrs {
+				//For each attribute at the touch....
+				
+				if key == NSAttachmentAttributeName, let attachment = value as? GasMaskTextAttachment {
+					results.append(ClickableElement.gasMask(attachment: attachment))
+				}
+				else if key == NSLinkAttributeName, let target = value as? URL {
+					results.append(ClickableElement.link(target: target))
+				}
+				
 			}
 		}
 		
-		return result
+		return results
 	}
+	
+	
+	
 	
 	private var trackedTouches = [UITouch]()
 	
@@ -164,7 +183,7 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 		var untrackedTouches = Set<UITouch>()
 		
 		for touch in touches {
-			if bodyLabel.bounds.contains(touch.location(in: bodyLabel)) && clickableElement(at: touch) != nil {
+			if bodyLabel.bounds.contains(touch.location(in: bodyLabel)) && !clickableElements(at: touch).isEmpty {
 				trackedTouches.append(touch)
 			} else {
 				untrackedTouches.insert(touch)
@@ -184,13 +203,19 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 			if trackedTouches.contains(touch) {
 				trackedTouches.remove(at: trackedTouches.index(of: touch)!)
 				
-				if bodyLabel.bounds.contains(touch.location(in: bodyLabel)), let image = clickableElement(at: touch) {
-					image.tapped()
-					bodyLabel.invalidateIntrinsicContentSize()
-					layoutSubviews()
-					layoutIfNeeded()
-					tableView.beginUpdates()
-					tableView.endUpdates()
+				if bodyLabel.bounds.contains(touch.location(in: bodyLabel)) {
+					for element in clickableElements(at: touch) {
+						if case .gasMask(let image) = element {
+							image.tapped()
+							bodyLabel.invalidateIntrinsicContentSize()
+							layoutSubviews()
+							layoutIfNeeded()
+							tableView.beginUpdates()
+							tableView.endUpdates()
+						} else if case .link(let url) = element {
+							UIApplication.shared.open(url)
+						}
+					}
 				}
 			} else {
 				untrackedTouches.insert(touch)
