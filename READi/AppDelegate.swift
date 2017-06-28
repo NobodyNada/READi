@@ -55,7 +55,9 @@ extension UIViewController {
 
 let client = Client(key: "825951bc05e37a875a13b95855c6e2a485637ce645513507e9b063dbb405715b")
 
-let metasmokeFilter = "%00%00%00%00%C2%BF%C2%88%00%03%C3%BF%C3%BF%C2%80%07%C3%80%00%01%C3%B9"
+let postsFilter = "AAAAAAAAAAPnx4AAAAAAASA="
+let idFilter = "AAAAAAAAAAIAAAAAAAAAAAA="
+let feedbacksFilter = "AAAAAKiAAAAAAAAAAAAAAAA="
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {

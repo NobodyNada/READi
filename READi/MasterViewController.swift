@@ -86,9 +86,9 @@ class MasterViewController: UITableViewController {
 			
 			if let feedback = message["feedback"] as? [String:String] {
 				self.received(feedback: feedback)
-			} else if let report = message["not_flagged"] as? [String:Any] {
-				self.received(report: report)
-			} else if let report = message["flagged"] as? [String:Any] {
+			} else if let flagInfo = (message["not_flagged"] ?? message["flag_log"]) as? [String:Any],
+				let report = flagInfo["post"] as? [String:Any] {
+				
 				self.received(report: report)
 			}
 		}
@@ -100,11 +100,20 @@ class MasterViewController: UITableViewController {
 	
 	func received(report: [String:Any]) {
 		DispatchQueue.main.async {
-			self.cachedReports.insert(Report(json: report), at: 0)
-			self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+			self.insert(reports: [Report(json: report)])
 		}
 	}
 	
+	
+	private func insert(reports: [Report]) {
+		let offset = tableView.contentOffset.y + tableView.contentInset.top
+		
+		cachedReports = reports + self.cachedReports
+		tableView.reloadData()
+		
+		tableView.scrollToRow(at: IndexPath(row: reports.count, section: 0), at: .top, animated: false)
+		tableView.contentOffset.y += offset
+	}
 	
 	func received(feedback: [String:String]) {
 		DispatchQueue.global().async {
@@ -271,7 +280,7 @@ class MasterViewController: UITableViewController {
 			postCell.tableView = tableView
 		}
 		
-		cell.layoutIfNeeded()
+		//cell.layoutIfNeeded()
 		
 		return cell
 	}
@@ -300,17 +309,29 @@ class MasterViewController: UITableViewController {
 	///MARK: Metasmoke API
 	
 	func fetchPosts(page: Int, pageSize: Int) throws -> [Report] {
-		let response: String = try client.get(
+		let idResponse: String = try client.get(
 			"https://metasmoke.erwaysoftware.com/api/posts/between" +
 				"?from_date=0&to_date=\(Int(Date().timeIntervalSince1970))" +
-			"&per_page=\(pageSize)&page=\(page)&key=\(client.key)"
+			"&per_page=\(pageSize)&page=\(page)&key=\(client.key)&filter=\(idFilter)"
 		)
 		
-		guard let json = try client.parseJSON(response) as? [String:Any] else {
+		guard let idJSON = try client.parseJSON(idResponse) as? [String:Any] else {
 			return []
 		}
 		
-		return Report.from(json: json)
+		let reports = Report.from(json: idJSON)
+        
+        let response: String = try client.get(
+            "https://metasmoke.erwaysoftware.com/api/posts/" +
+                reports.flatMap { String($0.id) }.joined(separator: ";") +
+            "?per_page=\(pageSize)&key=\(client.key)&filter=\(postsFilter)"
+        )
+        
+        guard let json = try client.parseJSON(response) as? [String:Any] else {
+            return []
+        }
+        
+        return Report.from(json: json)
 	}
 	
 	func fetchPosts(start: Int) {

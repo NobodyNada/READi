@@ -10,6 +10,9 @@ import UIKit
 import DTCoreText
 
 class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate {
+    @IBOutlet weak var background: UIView!
+    
+    
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var bodyLabel: UILabel!
 	
@@ -101,7 +104,17 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 				object: report
 			)
 			
-			titleLabel.text = report.title
+            if report.revisionCount > 1 {
+                titleLabel.text = "✏️️" + report.title
+            } else {
+                titleLabel.text = report.title
+            }
+            
+            if report.deletedAt != nil {
+                background.backgroundColor = #colorLiteral(red: 0.9552622677, green: 0.9176470588, blue: 0.9176470588, alpha: 1)
+            } else {
+                background.backgroundColor = .white
+            }
 			
 			//draw the plain text temporarily while rendering the HTML asynchronously
 			if let text = report.attributedBody {
@@ -146,6 +159,9 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 	///Returns an array of clickable elements at the touch.
 	private func clickableElements(at touch: UITouch) -> [ClickableElement] {
 		//Get the character which was tapped.
+		if textLayoutManager.textContainers.isEmpty {
+			textLayoutManager.addTextContainer(textContainer)
+		}
 		let location = touch.location(in: bodyLabel)
 		let tappedIndex = textLayoutManager.characterIndex(
 			for: location,

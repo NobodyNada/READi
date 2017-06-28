@@ -2,8 +2,8 @@
 //  GasMaskTextAttachment.swift
 //  READi
 //
-//  Created by Jonathan Keller on 3/26/17.
-//  Copyright © 2017 Jonathan Keller. All rights reserved.
+//  Created by NobodyNada on 3/26/17.
+//  Copyright © 2017 NobodyNada. All rights reserved.
 //
 
 import UIKit
