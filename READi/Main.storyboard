@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -316,7 +317,20 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reports" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Reports" id="Zdf-7t-Un8">
+                        <rightBarButtonItems>
+                            <barButtonItem image="chevron-down" id="W31-lE-4f4">
+                                <connections>
+                                    <action selector="nextReport:" destination="7bK-jq-Zjz" id="DGn-fz-WiE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="chevron-up" id="NLm-LC-ba6">
+                                <connections>
+                                    <action selector="previousReport:" destination="7bK-jq-Zjz" id="SZs-1g-TmZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="5Zf-3L-cD0">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -324,7 +338,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="-758.77061469265368"/>
+            <point key="canvasLocation" x="705" y="-758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -343,6 +357,10 @@
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chevron-down" width="21" height="12"/>
+        <image name="chevron-up" width="21" height="12"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
