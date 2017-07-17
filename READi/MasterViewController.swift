@@ -80,8 +80,10 @@ class MasterViewController: UITableViewController {
 		ws.event.message = {message in
 			self.lastMessage = Date()
 			guard let text = message as? String else { return }
-			print(text)
 			guard let json = (try? client.parseJSON(text) as? [String:Any]) ?? nil else { return }
+			if json["type"] as? String != "ping" {
+				print(text)
+			}
 			guard let message = json["message"] as? [String:Any] else { return }
 			
 			if let feedback = message["feedback"] as? [String:String] {
