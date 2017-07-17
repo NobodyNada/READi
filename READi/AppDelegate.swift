@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 enum Feedback {
 	case spam
@@ -74,18 +75,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 				completion(token)
 			} else {
 				let rootVC = self.window?.rootViewController as? RootViewController
-				rootVC?.performSegue(withIdentifier: "Authenticate", sender: self)
-				
+				let safariVC = SFSafariViewController(url: URL(string: "https://metasmoke.erwaysoftware.com/oauth/request?key=\(client.key)")!)
+				rootVC?.present(safariVC, animated: true)
+
 				rootVC?.authenticationCompletions.append(completion)
 				rootVC?.authenticationCompletions.append {token in
 					if token == nil { return }
 					UserDefaults.standard.set(token, forKey: "write_token")
 				}
-				
+
 			}
 		}
 	}
-	
+
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 		self.application = application
 		

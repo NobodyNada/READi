@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB1EC97D1E8355E000B895EF /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1EC97C1E8355E000B895EF /* AuthenticationViewController.swift */; };
 		AB3686891E886B9400206480 /* GasMaskTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */; };
 		AB36868B1E886BFE00206480 /* gas_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36868A1E886BFE00206480 /* gas_mask.png */; };
 		AB6CBA6E1EA5C69900556714 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CBA6D1EA5C69900556714 /* ReportTableViewCell.swift */; };
@@ -47,7 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB1EC97C1E8355E000B895EF /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasMaskTextAttachment.swift; sourceTree = "<group>"; };
 		AB36868A1E886BFE00206480 /* gas_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gas_mask.png; sourceTree = "<group>"; };
 		AB6CBA6D1EA5C69900556714 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				ABCDCEC21E83047D00450E8D /* DetailViewController.swift */,
 				AB6CBA6D1EA5C69900556714 /* ReportTableViewCell.swift */,
 				ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */,
-				AB1EC97C1E8355E000B895EF /* AuthenticationViewController.swift */,
 				ABCDCEF21E8304A700450E8D /* Main.storyboard */,
 				ABCDCEC71E83047D00450E8D /* Assets.xcassets */,
 				ABCDCEC91E83047D00450E8D /* LaunchScreen.storyboard */,
@@ -335,7 +332,6 @@
 			files = (
 				ABAB4D901E847D470032179F /* RootViewController.swift in Sources */,
 				ABCDCEC31E83047D00450E8D /* DetailViewController.swift in Sources */,
-				AB1EC97D1E8355E000B895EF /* AuthenticationViewController.swift in Sources */,
 				ABCDCEC11E83047D00450E8D /* MasterViewController.swift in Sources */,
 				ABCDCEF01E83049C00450E8D /* Client.swift in Sources */,
 				ABCDCEBF1E83047D00450E8D /* AppDelegate.swift in Sources */,

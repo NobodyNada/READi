@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -48,28 +48,28 @@
                                                 <rect key="frame" x="20" y="20" width="323" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0W-Cm-Mam">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="40"/>
                                                         <state key="normal" title="spam/rude"/>
                                                         <connections>
                                                             <action selector="spamPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="FRN-WY-KrF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kk6-CW-0CR">
-                                                        <rect key="frame" x="117.5" y="0.0" width="110" height="40"/>
+                                                        <rect key="frame" x="118" y="0.0" width="110" height="40"/>
                                                         <state key="normal" title="vandalism"/>
                                                         <connections>
                                                             <action selector="vandalismPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="Ywd-LH-839"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-Zp-RTh">
-                                                        <rect key="frame" x="227.5" y="0.0" width="48" height="40"/>
+                                                        <rect key="frame" x="228" y="0.0" width="47" height="40"/>
                                                         <state key="normal" title="naa"/>
                                                         <connections>
                                                             <action selector="naaPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="mti-dF-ByD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVs-ak-chk">
-                                                        <rect key="frame" x="275.5" y="0.0" width="47.5" height="40"/>
+                                                        <rect key="frame" x="275" y="0.0" width="48" height="40"/>
                                                         <state key="normal" title="fp"/>
                                                         <connections>
                                                             <action selector="fpPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="14y-M0-EKi"/>
@@ -168,81 +168,6 @@
             </objects>
             <point key="canvasLocation" x="705.5" y="126.5"/>
         </scene>
-        <!--Authenticate-->
-        <scene sceneID="3cr-O5-T62">
-            <objects>
-                <viewController title="Authenticate" id="oZe-j4-83H" customClass="AuthenticationViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ygm-0R-jeP"/>
-                        <viewControllerLayoutGuide type="bottom" id="uqz-QS-nKV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="a2l-yK-Lcb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tkn-Vc-Gun">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="ey8-ci-Js8">
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="GL5-pK-IxJ">
-                                            <connections>
-                                                <segue destination="JpA-cf-cEN" kind="unwind" unwindAction="unwindToRootWithSeuge:" id="mW1-Wh-dKh"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <connections>
-                                    <outlet property="delegate" destination="oZe-j4-83H" id="1WA-mP-0Q2"/>
-                                </connections>
-                            </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTJ-yG-n1i">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Tkn-Vc-Gun" firstAttribute="leading" secondItem="a2l-yK-Lcb" secondAttribute="leading" id="5g8-Ay-9TE"/>
-                            <constraint firstAttribute="trailing" secondItem="sTJ-yG-n1i" secondAttribute="trailing" id="HGh-4y-61k"/>
-                            <constraint firstItem="sTJ-yG-n1i" firstAttribute="leading" secondItem="a2l-yK-Lcb" secondAttribute="leading" id="MNx-Dt-RfU"/>
-                            <constraint firstItem="uqz-QS-nKV" firstAttribute="top" secondItem="sTJ-yG-n1i" secondAttribute="bottom" id="k7r-xd-Swd"/>
-                            <constraint firstItem="sTJ-yG-n1i" firstAttribute="top" secondItem="ygm-0R-jeP" secondAttribute="bottom" id="r8R-Cj-j68"/>
-                            <constraint firstItem="Tkn-Vc-Gun" firstAttribute="top" secondItem="a2l-yK-Lcb" secondAttribute="top" id="tZ7-M5-Q2d"/>
-                            <constraint firstAttribute="trailing" secondItem="Tkn-Vc-Gun" secondAttribute="trailing" id="tzl-hn-Bqd"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Authenticate" id="pE7-At-XRl">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="z8Z-fw-JAn">
-                            <connections>
-                                <segue destination="JpA-cf-cEN" kind="unwind" unwindAction="unwindToRootWithSeuge:" id="cAD-z1-QMY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="webViewContainer" destination="sTJ-yG-n1i" id="Pe2-MF-0hD"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C1M-4r-hLE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="JpA-cf-cEN" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="2624.8000000000002" y="-331.48425787106447"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nUB-KZ-6vd">
-            <objects>
-                <navigationController id="RzJ-8k-xO4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UED-wc-F1T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="oZe-j4-83H" kind="relationship" relationship="rootViewController" id="dpH-j8-bj2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eeI-pt-6RD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1783" y="-331"/>
-        </scene>
         <!--Root View Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
@@ -251,7 +176,6 @@
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
                         <segue destination="vC3-pB-5Vb" kind="relationship" relationship="detailViewController" id="Tll-UG-LXB"/>
-                        <segue destination="RzJ-8k-xO4" kind="presentation" identifier="Authenticate" id="oEo-nI-IDU"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
@@ -278,7 +202,7 @@
                                             <rect key="frame" x="8" y="8" width="359" height="305"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fj-ZZ-feq">
-                                                    <rect key="frame" x="8" y="8" width="343" height="26.5"/>
+                                                    <rect key="frame" x="8" y="8" width="343" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26.5" id="RpR-De-gbk"/>
                                                     </constraints>
@@ -297,21 +221,21 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85p-zQ-4lI">
-                                                            <rect key="frame" x="125" y="0.0" width="116.5" height="30"/>
+                                                            <rect key="frame" x="125" y="0.0" width="117" height="30"/>
                                                             <state key="normal" title="vandalism"/>
                                                             <connections>
                                                                 <action selector="vandalismPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Zas-Gp-2ev"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-34-Jas">
-                                                            <rect key="frame" x="241.5" y="0.0" width="51" height="30"/>
+                                                            <rect key="frame" x="242" y="0.0" width="50" height="30"/>
                                                             <state key="normal" title="naa"/>
                                                             <connections>
                                                                 <action selector="naaPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="kZY-ZV-hsY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-nh-jMb">
-                                                            <rect key="frame" x="292.5" y="0.0" width="50.5" height="30"/>
+                                                            <rect key="frame" x="292" y="0.0" width="51" height="30"/>
                                                             <state key="normal" title="fp"/>
                                                             <connections>
                                                                 <action selector="fpPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="vQG-h7-Pig"/>
