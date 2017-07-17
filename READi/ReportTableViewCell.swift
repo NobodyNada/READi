@@ -8,6 +8,7 @@
 
 import UIKit
 import DTCoreText
+import SafariServices
 
 class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate {
     @IBOutlet weak var background: UIView!
@@ -148,7 +149,11 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 	@IBAction func fpPressed(_ sender: Any) {
 		feedbackPressed(.fp)
 	}
-	
+	@IBAction func openInSafariPressed(_ sender: Any) {
+		let safariVC = SFSafariViewController(url: URL(string: "https:\(report!.link!)")!)
+		(tableView.delegate as! MasterViewController).splitViewController!.present(safariVC, animated: true)
+	}
+
 	//MARK: - Touch management
 	
 	private enum ClickableElement {

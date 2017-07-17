@@ -49,31 +49,40 @@
                                                 <rect key="frame" x="20" y="20" width="323" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0W-Cm-Mam">
-                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="40"/>
                                                         <state key="normal" title="spam/rude"/>
                                                         <connections>
                                                             <action selector="spamPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="FRN-WY-KrF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kk6-CW-0CR">
-                                                        <rect key="frame" x="118" y="0.0" width="110" height="40"/>
+                                                        <rect key="frame" x="105" y="0.0" width="98" height="40"/>
                                                         <state key="normal" title="vandalism"/>
                                                         <connections>
                                                             <action selector="vandalismPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="Ywd-LH-839"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-Zp-RTh">
-                                                        <rect key="frame" x="228" y="0.0" width="47" height="40"/>
+                                                        <rect key="frame" x="203" y="0.0" width="42" height="40"/>
                                                         <state key="normal" title="naa"/>
                                                         <connections>
                                                             <action selector="naaPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="mti-dF-ByD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVs-ak-chk">
-                                                        <rect key="frame" x="275" y="0.0" width="48" height="40"/>
+                                                        <rect key="frame" x="245" y="0.0" width="43" height="40"/>
                                                         <state key="normal" title="fp"/>
                                                         <connections>
                                                             <action selector="fpPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="14y-M0-EKi"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL6-Bf-WwB">
+                                                        <rect key="frame" x="288" y="0.0" width="35" height="40"/>
+                                                        <state key="normal" image="forward">
+                                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="openInSafariPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="O9U-Q8-aBE"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -215,31 +224,40 @@
                                                     <rect key="frame" x="8" y="35" width="343" height="30"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcI-KT-CfD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="125" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="111" height="30"/>
                                                             <state key="normal" title="spam/rude"/>
                                                             <connections>
                                                                 <action selector="spamPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="iGf-1i-Z3x"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85p-zQ-4lI">
-                                                            <rect key="frame" x="125" y="0.0" width="117" height="30"/>
+                                                            <rect key="frame" x="111" y="0.0" width="104" height="30"/>
                                                             <state key="normal" title="vandalism"/>
                                                             <connections>
                                                                 <action selector="vandalismPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Zas-Gp-2ev"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-34-Jas">
-                                                            <rect key="frame" x="242" y="0.0" width="50" height="30"/>
+                                                            <rect key="frame" x="215" y="0.0" width="45" height="30"/>
                                                             <state key="normal" title="naa"/>
                                                             <connections>
                                                                 <action selector="naaPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="kZY-ZV-hsY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-nh-jMb">
-                                                            <rect key="frame" x="292" y="0.0" width="51" height="30"/>
+                                                            <rect key="frame" x="260" y="0.0" width="45" height="30"/>
                                                             <state key="normal" title="fp"/>
                                                             <connections>
                                                                 <action selector="fpPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="vQG-h7-Pig"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OZ-hf-7kt">
+                                                            <rect key="frame" x="305" y="0.0" width="38" height="30"/>
+                                                            <state key="normal" image="forward">
+                                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="openInSafariPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Y9A-hS-jwC"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -360,6 +378,7 @@
     <resources>
         <image name="chevron-down" width="21" height="12"/>
         <image name="chevron-up" width="21" height="12"/>
+        <image name="forward" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
