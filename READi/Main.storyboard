@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5HT-ep-v5o">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llp-tz-JZe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZU-0Y-S0D">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
@@ -178,10 +178,65 @@
             </objects>
             <point key="canvasLocation" x="705.5" y="126.5"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Charcoal HQ-->
+        <scene sceneID="G9b-dO-pRS">
+            <objects>
+                <viewController id="WNh-OK-R7J" customClass="ChatViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nzo-qo-wRn"/>
+                        <viewControllerLayoutGuide type="bottom" id="iNy-hE-pKO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BqP-ZN-KzX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="css-Nn-V8u">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Loading Charcoal HQ
+Just a minute…</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="iNy-hE-pKO" firstAttribute="top" secondItem="css-Nn-V8u" secondAttribute="bottom" id="IOm-Of-pHA"/>
+                            <constraint firstItem="css-Nn-V8u" firstAttribute="leading" secondItem="BqP-ZN-KzX" secondAttribute="leading" id="LRa-nB-n4Y"/>
+                            <constraint firstAttribute="trailing" secondItem="css-Nn-V8u" secondAttribute="trailing" id="qFr-hr-LJT"/>
+                            <constraint firstItem="css-Nn-V8u" firstAttribute="top" secondItem="BqP-ZN-KzX" secondAttribute="top" id="tk9-e8-BZ8"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Charcoal HQ" image="chat" selectedImage="chat-selected" id="ga3-Vj-dlv"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S0w-Bz-fbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-858.39999999999998" y="903.59820089955031"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="cKV-xC-2ND">
+            <objects>
+                <tabBarController id="5HT-ep-v5o" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="g0c-43-oRh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="WNh-OK-R7J" kind="relationship" relationship="viewControllers" id="K5w-XB-i88"/>
+                        <segue destination="H1p-Uh-vWS" kind="relationship" relationship="viewControllers" id="KLU-MD-2ZG"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c2W-GJ-ZEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1647" y="304"/>
+        </scene>
+        <!--Reports-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
                 <splitViewController id="H1p-Uh-vWS" customClass="RootViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Reports" image="reports" selectedImage="reports-selected" id="iFW-Qt-QCT"/>
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
@@ -376,11 +431,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chat" width="336" height="336"/>
+        <image name="chat-selected" width="336" height="336"/>
         <image name="chevron-down" width="21" height="12"/>
         <image name="chevron-up" width="21" height="12"/>
         <image name="forward" width="25" height="20"/>
+        <image name="reports" width="348" height="336"/>
+        <image name="reports-selected" width="348" height="336"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

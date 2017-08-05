@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A519F9601F1D2DEC007D7897 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */; };
 		AB3686891E886B9400206480 /* GasMaskTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */; };
 		AB36868B1E886BFE00206480 /* gas_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36868A1E886BFE00206480 /* gas_mask.png */; };
 		AB6CBA6E1EA5C69900556714 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CBA6D1EA5C69900556714 /* ReportTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasMaskTextAttachment.swift; sourceTree = "<group>"; };
 		AB36868A1E886BFE00206480 /* gas_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gas_mask.png; sourceTree = "<group>"; };
 		AB6CBA6D1EA5C69900556714 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */,
 				ABCDCEF21E8304A700450E8D /* Main.storyboard */,
 				ABCDCEC71E83047D00450E8D /* Assets.xcassets */,
+				A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */,
 				ABCDCEC91E83047D00450E8D /* LaunchScreen.storyboard */,
 				ABCDCECC1E83047D00450E8D /* Info.plist */,
 				AB36868A1E886BFE00206480 /* gas_mask.png */,
@@ -241,7 +244,7 @@
 				TargetAttributes = {
 					ABCDCEBA1E83047D00450E8D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 75BNT2TPX4;
+						DevelopmentTeam = NXLAJ2VA7M;
 						ProvisioningStyle = Automatic;
 					};
 					ABCDCED01E83047D00450E8D = {
@@ -332,6 +335,7 @@
 			files = (
 				ABAB4D901E847D470032179F /* RootViewController.swift in Sources */,
 				ABCDCEC31E83047D00450E8D /* DetailViewController.swift in Sources */,
+				A519F9601F1D2DEC007D7897 /* ChatViewController.swift in Sources */,
 				ABCDCEC11E83047D00450E8D /* MasterViewController.swift in Sources */,
 				ABCDCEF01E83049C00450E8D /* Client.swift in Sources */,
 				ABCDCEBF1E83047D00450E8D /* AppDelegate.swift in Sources */,
@@ -483,7 +487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 75BNT2TPX4;
+				DEVELOPMENT_TEAM = NXLAJ2VA7M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -500,7 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 75BNT2TPX4;
+				DEVELOPMENT_TEAM = NXLAJ2VA7M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
