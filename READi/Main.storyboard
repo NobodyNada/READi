@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llp-tz-JZe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZU-0Y-S0D">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
@@ -392,12 +392,12 @@ Just a minute…</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reports" id="Zdf-7t-Un8">
                         <rightBarButtonItems>
-                            <barButtonItem image="chevron-down" id="W31-lE-4f4">
+                            <barButtonItem image="down" id="W31-lE-4f4">
                                 <connections>
                                     <action selector="nextReport:" destination="7bK-jq-Zjz" id="DGn-fz-WiE"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="chevron-up" id="NLm-LC-ba6">
+                            <barButtonItem image="up" id="NLm-LC-ba6">
                                 <connections>
                                     <action selector="previousReport:" destination="7bK-jq-Zjz" id="SZs-1g-TmZ"/>
                                 </connections>
@@ -433,13 +433,13 @@ Just a minute…</string>
     <resources>
         <image name="chat" width="336" height="336"/>
         <image name="chat-selected" width="336" height="336"/>
-        <image name="chevron-down" width="21" height="12"/>
-        <image name="chevron-up" width="21" height="12"/>
+        <image name="down" width="16" height="16"/>
         <image name="forward" width="25" height="20"/>
         <image name="reports" width="348" height="336"/>
         <image name="reports-selected" width="348" height="336"/>
+        <image name="up" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
+        <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
 </document>
