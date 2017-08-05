@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5HT-ep-v5o">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,31 +49,40 @@
                                                 <rect key="frame" x="20" y="20" width="323" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0W-Cm-Mam">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="40"/>
                                                         <state key="normal" title="spam/rude"/>
                                                         <connections>
                                                             <action selector="spamPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="FRN-WY-KrF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kk6-CW-0CR">
-                                                        <rect key="frame" x="117.5" y="0.0" width="110" height="40"/>
+                                                        <rect key="frame" x="105" y="0.0" width="98" height="40"/>
                                                         <state key="normal" title="vandalism"/>
                                                         <connections>
                                                             <action selector="vandalismPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="Ywd-LH-839"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-Zp-RTh">
-                                                        <rect key="frame" x="227.5" y="0.0" width="48" height="40"/>
+                                                        <rect key="frame" x="203" y="0.0" width="42" height="40"/>
                                                         <state key="normal" title="naa"/>
                                                         <connections>
                                                             <action selector="naaPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="mti-dF-ByD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVs-ak-chk">
-                                                        <rect key="frame" x="275.5" y="0.0" width="47.5" height="40"/>
+                                                        <rect key="frame" x="245" y="0.0" width="43" height="40"/>
                                                         <state key="normal" title="fp"/>
                                                         <connections>
                                                             <action selector="fpPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="14y-M0-EKi"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL6-Bf-WwB">
+                                                        <rect key="frame" x="288" y="0.0" width="35" height="40"/>
+                                                        <state key="normal" image="forward">
+                                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="openInSafariPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="O9U-Q8-aBE"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -168,90 +178,69 @@
             </objects>
             <point key="canvasLocation" x="705.5" y="126.5"/>
         </scene>
-        <!--Authenticate-->
-        <scene sceneID="3cr-O5-T62">
+        <!--Charcoal HQ-->
+        <scene sceneID="G9b-dO-pRS">
             <objects>
-                <viewController title="Authenticate" id="oZe-j4-83H" customClass="AuthenticationViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WNh-OK-R7J" customClass="ChatViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ygm-0R-jeP"/>
-                        <viewControllerLayoutGuide type="bottom" id="uqz-QS-nKV"/>
+                        <viewControllerLayoutGuide type="top" id="nzo-qo-wRn"/>
+                        <viewControllerLayoutGuide type="bottom" id="iNy-hE-pKO"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="a2l-yK-Lcb">
+                    <view key="view" contentMode="scaleToFill" id="BqP-ZN-KzX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tkn-Vc-Gun">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="ey8-ci-Js8">
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="GL5-pK-IxJ">
-                                            <connections>
-                                                <segue destination="JpA-cf-cEN" kind="unwind" unwindAction="unwindToRootWithSeuge:" id="mW1-Wh-dKh"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <connections>
-                                    <outlet property="delegate" destination="oZe-j4-83H" id="1WA-mP-0Q2"/>
-                                </connections>
-                            </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTJ-yG-n1i">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="css-Nn-V8u">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Loading Charcoal HQ
+Just a minute…</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Tkn-Vc-Gun" firstAttribute="leading" secondItem="a2l-yK-Lcb" secondAttribute="leading" id="5g8-Ay-9TE"/>
-                            <constraint firstAttribute="trailing" secondItem="sTJ-yG-n1i" secondAttribute="trailing" id="HGh-4y-61k"/>
-                            <constraint firstItem="sTJ-yG-n1i" firstAttribute="leading" secondItem="a2l-yK-Lcb" secondAttribute="leading" id="MNx-Dt-RfU"/>
-                            <constraint firstItem="uqz-QS-nKV" firstAttribute="top" secondItem="sTJ-yG-n1i" secondAttribute="bottom" id="k7r-xd-Swd"/>
-                            <constraint firstItem="sTJ-yG-n1i" firstAttribute="top" secondItem="ygm-0R-jeP" secondAttribute="bottom" id="r8R-Cj-j68"/>
-                            <constraint firstItem="Tkn-Vc-Gun" firstAttribute="top" secondItem="a2l-yK-Lcb" secondAttribute="top" id="tZ7-M5-Q2d"/>
-                            <constraint firstAttribute="trailing" secondItem="Tkn-Vc-Gun" secondAttribute="trailing" id="tzl-hn-Bqd"/>
+                            <constraint firstItem="iNy-hE-pKO" firstAttribute="top" secondItem="css-Nn-V8u" secondAttribute="bottom" id="IOm-Of-pHA"/>
+                            <constraint firstItem="css-Nn-V8u" firstAttribute="leading" secondItem="BqP-ZN-KzX" secondAttribute="leading" id="LRa-nB-n4Y"/>
+                            <constraint firstAttribute="trailing" secondItem="css-Nn-V8u" secondAttribute="trailing" id="qFr-hr-LJT"/>
+                            <constraint firstItem="css-Nn-V8u" firstAttribute="top" secondItem="BqP-ZN-KzX" secondAttribute="top" id="tk9-e8-BZ8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Authenticate" id="pE7-At-XRl">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="z8Z-fw-JAn">
-                            <connections>
-                                <segue destination="JpA-cf-cEN" kind="unwind" unwindAction="unwindToRootWithSeuge:" id="cAD-z1-QMY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="webViewContainer" destination="sTJ-yG-n1i" id="Pe2-MF-0hD"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="Charcoal HQ" image="chat" selectedImage="chat-selected" id="ga3-Vj-dlv"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C1M-4r-hLE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="JpA-cf-cEN" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S0w-Bz-fbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2624.8000000000002" y="-331.48425787106447"/>
+            <point key="canvasLocation" x="-858.39999999999998" y="903.59820089955031"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nUB-KZ-6vd">
+        <!--Tab Bar Controller-->
+        <scene sceneID="cKV-xC-2ND">
             <objects>
-                <navigationController id="RzJ-8k-xO4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UED-wc-F1T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                <tabBarController id="5HT-ep-v5o" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="g0c-43-oRh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
                     <connections>
-                        <segue destination="oZe-j4-83H" kind="relationship" relationship="rootViewController" id="dpH-j8-bj2"/>
+                        <segue destination="WNh-OK-R7J" kind="relationship" relationship="viewControllers" id="K5w-XB-i88"/>
+                        <segue destination="H1p-Uh-vWS" kind="relationship" relationship="viewControllers" id="KLU-MD-2ZG"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eeI-pt-6RD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c2W-GJ-ZEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="-331"/>
+            <point key="canvasLocation" x="-1647" y="304"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Reports-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
                 <splitViewController id="H1p-Uh-vWS" customClass="RootViewController" customModule="READi" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Reports" image="reports" selectedImage="reports-selected" id="iFW-Qt-QCT"/>
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
                         <segue destination="vC3-pB-5Vb" kind="relationship" relationship="detailViewController" id="Tll-UG-LXB"/>
-                        <segue destination="RzJ-8k-xO4" kind="presentation" identifier="Authenticate" id="oEo-nI-IDU"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
@@ -278,7 +267,7 @@
                                             <rect key="frame" x="8" y="8" width="359" height="305"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fj-ZZ-feq">
-                                                    <rect key="frame" x="8" y="8" width="343" height="26.5"/>
+                                                    <rect key="frame" x="8" y="8" width="343" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26.5" id="RpR-De-gbk"/>
                                                     </constraints>
@@ -290,31 +279,40 @@
                                                     <rect key="frame" x="8" y="35" width="343" height="30"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcI-KT-CfD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="125" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="111" height="30"/>
                                                             <state key="normal" title="spam/rude"/>
                                                             <connections>
                                                                 <action selector="spamPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="iGf-1i-Z3x"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85p-zQ-4lI">
-                                                            <rect key="frame" x="125" y="0.0" width="116.5" height="30"/>
+                                                            <rect key="frame" x="111" y="0.0" width="104" height="30"/>
                                                             <state key="normal" title="vandalism"/>
                                                             <connections>
                                                                 <action selector="vandalismPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Zas-Gp-2ev"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-34-Jas">
-                                                            <rect key="frame" x="241.5" y="0.0" width="51" height="30"/>
+                                                            <rect key="frame" x="215" y="0.0" width="45" height="30"/>
                                                             <state key="normal" title="naa"/>
                                                             <connections>
                                                                 <action selector="naaPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="kZY-ZV-hsY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-nh-jMb">
-                                                            <rect key="frame" x="292.5" y="0.0" width="50.5" height="30"/>
+                                                            <rect key="frame" x="260" y="0.0" width="45" height="30"/>
                                                             <state key="normal" title="fp"/>
                                                             <connections>
                                                                 <action selector="fpPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="vQG-h7-Pig"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OZ-hf-7kt">
+                                                            <rect key="frame" x="305" y="0.0" width="38" height="30"/>
+                                                            <state key="normal" image="forward">
+                                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="openInSafariPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Y9A-hS-jwC"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -392,7 +390,20 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reports" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Reports" id="Zdf-7t-Un8">
+                        <rightBarButtonItems>
+                            <barButtonItem image="down" id="W31-lE-4f4">
+                                <connections>
+                                    <action selector="nextReport:" destination="7bK-jq-Zjz" id="DGn-fz-WiE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="up" id="NLm-LC-ba6">
+                                <connections>
+                                    <action selector="previousReport:" destination="7bK-jq-Zjz" id="SZs-1g-TmZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="5Zf-3L-cD0">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -400,7 +411,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="-758.77061469265368"/>
+            <point key="canvasLocation" x="705" y="-758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -419,6 +430,15 @@
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chat" width="336" height="336"/>
+        <image name="chat-selected" width="336" height="336"/>
+        <image name="down" width="16" height="16"/>
+        <image name="forward" width="25" height="20"/>
+        <image name="reports" width="348" height="336"/>
+        <image name="reports-selected" width="348" height="336"/>
+        <image name="up" width="16" height="16"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>

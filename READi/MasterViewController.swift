@@ -80,8 +80,10 @@ class MasterViewController: UITableViewController {
 		ws.event.message = {message in
 			self.lastMessage = Date()
 			guard let text = message as? String else { return }
-			print(text)
 			guard let json = (try? client.parseJSON(text) as? [String:Any]) ?? nil else { return }
+			if json["type"] as? String != "ping" {
+				print(text)
+			}
 			guard let message = json["message"] as? [String:Any] else { return }
 			
 			if let feedback = message["feedback"] as? [String:String] {
@@ -305,8 +307,32 @@ class MasterViewController: UITableViewController {
 		}
 	}
 	
-	
-	///MARK: Metasmoke API
+
+	// MARK: - Navigation Bar Buttons
+	func getCurrentIndexPath() -> IndexPath {
+		let point = CGPoint(
+			x: 50,
+			y: tableView.contentOffset.y + tableView.contentInset.top + 10
+		)
+		return tableView.indexPathForRow(at: point)!
+	}
+	@IBAction func previousReport(_ sender: Any) {
+		var indexPath = self.getCurrentIndexPath()
+		if indexPath.row > 0 {
+			indexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+		} else {
+			// scroll to top of first row
+		}
+		tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+}
+	@IBAction func nextReport(_ sender: Any) {
+		let indexPath = self.getCurrentIndexPath()
+		if indexPath.row < self.tableView(tableView, numberOfRowsInSection: indexPath.section) {
+			tableView.scrollToRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section), at: .top, animated: true)
+		}
+	}
+
+	// MARK: - Metasmoke API
 	
 	func fetchPosts(page: Int, pageSize: Int) throws -> [Report] {
 		let idResponse: String = try client.get(

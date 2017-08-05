@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailViewController: UIViewController {
 	
@@ -33,7 +34,11 @@ class DetailViewController: UIViewController {
 	@IBAction func fpPressed(_ sender: Any) {
 		feedbackPressed(.fp)
 	}
-	
+	@IBAction func openInSafariPressed(_ sender: Any) {
+		let safariVC = SFSafariViewController(url: URL(string: "https:\(report!.link!)")!)
+		splitViewController!.present(safariVC, animated: true)
+	}
+
 	func feedbackPressed(_ type: Feedback) {
 		report?.send(feedback: type)
 	}

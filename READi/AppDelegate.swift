@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 enum Feedback {
 	case spam
@@ -74,18 +75,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 				completion(token)
 			} else {
 				let rootVC = self.window?.rootViewController as? RootViewController
-				rootVC?.performSegue(withIdentifier: "Authenticate", sender: self)
-				
+				let safariVC = SFSafariViewController(url: URL(string: "https://metasmoke.erwaysoftware.com/oauth/request?key=\(client.key)")!)
+				rootVC?.present(safariVC, animated: true)
+
 				rootVC?.authenticationCompletions.append(completion)
 				rootVC?.authenticationCompletions.append {token in
 					if token == nil { return }
 					UserDefaults.standard.set(token, forKey: "write_token")
 				}
-				
+
 			}
 		}
 	}
-	
+
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 		self.application = application
 		
@@ -94,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-		let splitViewController = self.window!.rootViewController as! UISplitViewController
+		let splitViewController = self.window!.rootViewController!.childViewControllers[1] as! UISplitViewController
 		let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
 		navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
 		splitViewController.delegate = self
