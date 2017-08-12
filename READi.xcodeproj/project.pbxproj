@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53F1326E1F37627E0011CB4C /* autoflagging.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 53F1326D1F37627E0011CB4C /* autoflagging.user.js */; };
 		A519F9601F1D2DEC007D7897 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */; };
 		AB3686891E886B9400206480 /* GasMaskTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */; };
 		AB36868B1E886BFE00206480 /* gas_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36868A1E886BFE00206480 /* gas_mask.png */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53F1326D1F37627E0011CB4C /* autoflagging.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = autoflagging.user.js; sourceTree = "<group>"; };
 		A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasMaskTextAttachment.swift; sourceTree = "<group>"; };
 		AB36868A1E886BFE00206480 /* gas_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gas_mask.png; sourceTree = "<group>"; };
@@ -103,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53F1326C1F3762400011CB4C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				53F1326D1F37627E0011CB4C /* autoflagging.user.js */,
+				A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		AB8026741E8704800042D757 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,20 +148,20 @@
 		ABCDCEBD1E83047D00450E8D /* READi */ = {
 			isa = PBXGroup;
 			children = (
+				53F1326C1F3762400011CB4C /* Chat */,
 				ABCDCEBE1E83047D00450E8D /* AppDelegate.swift */,
-				ABAB4D8F1E847D470032179F /* RootViewController.swift */,
 				ABCDCEEE1E83049C00450E8D /* Client.swift */,
+				ABCDCEC21E83047D00450E8D /* DetailViewController.swift */,
+				AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */,
+				ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */,
+				ABCDCEC01E83047D00450E8D /* MasterViewController.swift */,
 				ABCDCEF41E83052A00450E8D /* NSStringHTMLDecoding.swift */,
 				ABCDCEF61E83064000450E8D /* Report.swift */,
-				AB3686881E886B9400206480 /* GasMaskTextAttachment.swift */,
-				ABCDCEC01E83047D00450E8D /* MasterViewController.swift */,
-				ABCDCEC21E83047D00450E8D /* DetailViewController.swift */,
 				AB6CBA6D1EA5C69900556714 /* ReportTableViewCell.swift */,
-				ABF25A771E83148300E2105E /* LoadingTableViewCell.swift */,
-				ABCDCEF21E8304A700450E8D /* Main.storyboard */,
+				ABAB4D8F1E847D470032179F /* RootViewController.swift */,
 				ABCDCEC71E83047D00450E8D /* Assets.xcassets */,
-				A519F95F1F1D2DEC007D7897 /* ChatViewController.swift */,
 				ABCDCEC91E83047D00450E8D /* LaunchScreen.storyboard */,
+				ABCDCEF21E8304A700450E8D /* Main.storyboard */,
 				ABCDCECC1E83047D00450E8D /* Info.plist */,
 				AB36868A1E886BFE00206480 /* gas_mask.png */,
 			);
@@ -244,8 +255,8 @@
 				TargetAttributes = {
 					ABCDCEBA1E83047D00450E8D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = NXLAJ2VA7M;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 42AAW4AA73;
+						ProvisioningStyle = Manual;
 					};
 					ABCDCED01E83047D00450E8D = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -287,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCDCECB1E83047D00450E8D /* LaunchScreen.storyboard in Resources */,
+				53F1326E1F37627E0011CB4C /* autoflagging.user.js in Resources */,
 				AB36868B1E886BFE00206480 /* gas_mask.png in Resources */,
 				ABCDCEC81E83047D00450E8D /* Assets.xcassets in Resources */,
 				ABCDCEF31E8304A700450E8D /* Main.storyboard in Resources */,
@@ -487,7 +499,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NXLAJ2VA7M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 42AAW4AA73;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -496,6 +509,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nobodynada.READi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6b8bb154-8b0d-4115-8f2f-9cb18d0b9328";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -504,7 +519,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NXLAJ2VA7M;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 42AAW4AA73;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -513,6 +529,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nobodynada.READi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6b8bb154-8b0d-4115-8f2f-9cb18d0b9328";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
