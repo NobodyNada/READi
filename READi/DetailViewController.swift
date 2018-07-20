@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
 	}
 	
 	
-	func updateFeedback(notification: NSNotification? = nil) {
+	@objc func updateFeedback(notification: NSNotification? = nil) {
 		guard let report = self.report else { return }
 		
 		let spamCount = report.feedback?.filter { $0.type == .spam }.count ?? 0
@@ -72,14 +72,14 @@ class DetailViewController: UIViewController {
 		}
 	}
 	
-	func feedbackFailed(notification: NSNotification) {
+	@objc func feedbackFailed(notification: NSNotification) {
 		guard view.window != nil else { return }
 		
 		let details = notification.userInfo?["errorDetails"] as? String
 		self.alert("Failed to send feedback!", details: details)
 	}
 	
-	func flagFailed(notification: NSNotification) {
+	@objc func flagFailed(notification: NSNotification) {
 		guard view.window != nil else { return }
 		
 		let details = notification.userInfo?["errorDetails"] as? String

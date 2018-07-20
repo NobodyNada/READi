@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5HT-ep-v5o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5HT-ep-v5o">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,7 +16,7 @@
             <objects>
                 <navigationController id="RMx-3f-FxP" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llp-tz-JZe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZU-0Y-S0D">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
@@ -56,28 +56,28 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kk6-CW-0CR">
-                                                        <rect key="frame" x="105" y="0.0" width="98" height="40"/>
+                                                        <rect key="frame" x="105" y="0.0" width="97.5" height="40"/>
                                                         <state key="normal" title="vandalism"/>
                                                         <connections>
                                                             <action selector="vandalismPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="Ywd-LH-839"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-Zp-RTh">
-                                                        <rect key="frame" x="203" y="0.0" width="42" height="40"/>
+                                                        <rect key="frame" x="202.5" y="0.0" width="42.5" height="40"/>
                                                         <state key="normal" title="naa"/>
                                                         <connections>
                                                             <action selector="naaPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="mti-dF-ByD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVs-ak-chk">
-                                                        <rect key="frame" x="245" y="0.0" width="43" height="40"/>
+                                                        <rect key="frame" x="245" y="0.0" width="42.5" height="40"/>
                                                         <state key="normal" title="fp"/>
                                                         <connections>
                                                             <action selector="fpPressed:" destination="JEX-9P-axG" eventType="touchUpInside" id="14y-M0-EKi"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL6-Bf-WwB">
-                                                        <rect key="frame" x="288" y="0.0" width="35" height="40"/>
+                                                        <rect key="frame" x="287.5" y="0.0" width="35.5" height="40"/>
                                                         <state key="normal" image="forward">
                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -264,10 +264,10 @@ Just a minute…</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttv-om-AEM">
-                                            <rect key="frame" x="8" y="8" width="359" height="305"/>
+                                            <rect key="frame" x="16" y="11" width="343" height="299"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fj-ZZ-feq">
-                                                    <rect key="frame" x="8" y="8" width="343" height="27"/>
+                                                    <rect key="frame" x="8" y="8" width="327" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26.5" id="RpR-De-gbk"/>
                                                     </constraints>
@@ -276,38 +276,38 @@ Just a minute…</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9C3-Tc-CJK">
-                                                    <rect key="frame" x="8" y="35" width="343" height="30"/>
+                                                    <rect key="frame" x="8" y="35" width="327" height="30"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcI-KT-CfD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="111" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="106" height="30"/>
                                                             <state key="normal" title="spam/rude"/>
                                                             <connections>
                                                                 <action selector="spamPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="iGf-1i-Z3x"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85p-zQ-4lI">
-                                                            <rect key="frame" x="111" y="0.0" width="104" height="30"/>
+                                                            <rect key="frame" x="106" y="0.0" width="99" height="30"/>
                                                             <state key="normal" title="vandalism"/>
                                                             <connections>
                                                                 <action selector="vandalismPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="Zas-Gp-2ev"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-34-Jas">
-                                                            <rect key="frame" x="215" y="0.0" width="45" height="30"/>
+                                                            <rect key="frame" x="205" y="0.0" width="43" height="30"/>
                                                             <state key="normal" title="naa"/>
                                                             <connections>
                                                                 <action selector="naaPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="kZY-ZV-hsY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-nh-jMb">
-                                                            <rect key="frame" x="260" y="0.0" width="45" height="30"/>
+                                                            <rect key="frame" x="248" y="0.0" width="43" height="30"/>
                                                             <state key="normal" title="fp"/>
                                                             <connections>
                                                                 <action selector="fpPressed:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="vQG-h7-Pig"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OZ-hf-7kt">
-                                                            <rect key="frame" x="305" y="0.0" width="38" height="30"/>
+                                                            <rect key="frame" x="291" y="0.0" width="36" height="30"/>
                                                             <state key="normal" image="forward">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -321,7 +321,7 @@ Just a minute…</string>
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNz-Nm-RqH">
-                                                    <rect key="frame" x="8" y="73" width="343" height="224"/>
+                                                    <rect key="frame" x="8" y="73" width="327" height="218"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -418,7 +418,7 @@ Just a minute…</string>
             <objects>
                 <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -431,13 +431,13 @@ Just a minute…</string>
         </scene>
     </scenes>
     <resources>
-        <image name="chat" width="336" height="336"/>
-        <image name="chat-selected" width="336" height="336"/>
-        <image name="down" width="16" height="16"/>
+        <image name="chat" width="25" height="25"/>
+        <image name="chat-selected" width="25" height="25"/>
+        <image name="down" width="25" height="25"/>
         <image name="forward" width="25" height="20"/>
-        <image name="reports" width="348" height="336"/>
-        <image name="reports-selected" width="348" height="336"/>
-        <image name="up" width="16" height="16"/>
+        <image name="reports" width="25" height="24"/>
+        <image name="reports-selected" width="25" height="24"/>
+        <image name="up" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>

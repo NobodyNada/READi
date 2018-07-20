@@ -123,7 +123,7 @@ class Report: CustomStringConvertible {
         guard id != nil else { return }
         
         let response: String = try client.get(
-            "https://metasmoke.erwaysoftware.com/api/post/\(id!)/feedback" +
+            "https://metasmoke.erwaysoftware.com/api/v2.0/feedbacks/post/\(id!)" +
             "?per_page=\(100)&key=\(client.key)"
         )
         
@@ -212,10 +212,10 @@ class Report: CustomStringConvertible {
             )
             if let body = self._attributedBody as? NSMutableAttributedString {
                 body.enumerateAttributes(in: NSRange(0..<body.length)) {attributes, range, stop in
-                    if let attachment = attributes[NSAttachmentAttributeName] as? DTImageTextAttachment {
+                    if let attachment = attributes[NSAttributedStringKey.attachment] as? DTImageTextAttachment {
                         let newAttachment = GasMaskTextAttachment()
                         newAttachment.imageURL = attachment.contentURL
-                        body.setAttributes([NSAttachmentAttributeName:newAttachment], range: range)
+                        body.setAttributes([NSAttributedStringKey.attachment:newAttachment], range: range)
                     }
                 }
             }

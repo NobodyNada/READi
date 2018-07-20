@@ -26,7 +26,7 @@ extension String {
 			result.append("\(key.urlEncodedString)=\(value.urlEncodedString)")
 		}
 		
-		self.init(result.joined(separator: "&"))!
+		self.init(stringLiteral: result.joined(separator: "&"))
 	}
 }
 
@@ -93,7 +93,9 @@ open class Client: NSObject, URLSessionDataDelegate {
 	
 	private var tasks = [URLSessionTask:HTTPTask]() {
 		didSet {
-			UIApplication.shared.isNetworkActivityIndicatorVisible = !tasks.isEmpty
+			DispatchQueue.main.async {
+				UIApplication.shared.isNetworkActivityIndicatorVisible = !self.tasks.isEmpty
+			}
 		}
 	}
 	

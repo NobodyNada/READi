@@ -56,9 +56,9 @@ extension UIViewController {
 
 let client = Client(key: "825951bc05e37a875a13b95855c6e2a485637ce645513507e9b063dbb405715b")
 
-let postsFilter = "AAAAAAAAAAPnx4AAAAAAASA="
-let idFilter = "AAAAAAAAAAIAAAAAAAAAAAA="
-let feedbacksFilter = "AAAAAKiAAAAAAAAAAAAAAAA="
+let postsFilter = "GOFHJLOGKIMOKMIOJNGKMJOOIJFHHLKL"
+let idFilter = "GFGJGHFJNFGNHKNIKHGGOMILHKLJIFFN"
+//let feedbacksFilter = "AAAAAKiAAAAAAAAAAAAAAAA="
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 			if let token = UserDefaults.standard.string(forKey: "write_token") {
 				completion(token)
 			} else {
-				let rootVC = self.window?.rootViewController as? RootViewController
+				let rootVC = (self.window?.rootViewController as! UITabBarController).selectedViewController as? RootViewController
 				let safariVC = SFSafariViewController(url: URL(string: "https://metasmoke.erwaysoftware.com/oauth/request?key=\(client.key)")!)
 				rootVC?.present(safariVC, animated: true)
 

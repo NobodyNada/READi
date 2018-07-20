@@ -39,10 +39,12 @@
   };
   autoflagging.smokeyID = autoflagging.smokeyIds[location.host];
   autoflagging.key = "d897aa9f315174f081309cef13dfd7caa4ddfec1c2f8641204506636751392a4"; // this script's MetaSmoke API key
-  autoflagging.baseURL = "https://metasmoke.erwaysoftware.com/api/posts/urls?key=" + autoflagging.key;
+  autoflagging.apiURL = "https://metasmoke.erwaysoftware.com/api/v2.0";
+  autoflagging.baseURL = autoflagging.apiURL + "/posts/urls?filter=HFHNHJFMGNKNFFFIGGOJLNNOFGNMILLJ&key=" + autoflagging.key;
   autoflagging.selector = ".user-" + autoflagging.smokeyID + " .message ";
-  autoflagging.messageRegex = /\[ <a[^>]+>SmokeDetector<\/a>(?: \| <a[^>]+>MS<\/a>)? [^\]]+?] ([^:]+):(?: post \d+ out of \d+\):)? <a href="([^"]+)">(.+?)<\/a> by (?:<a href="[^"]+\/u(sers)?\/(\d+)">(.+?)<\/a>|a deleted user) on <code>([^<]+)<\/code>/;
+  autoflagging.messageRegex = /\[ <a[^>]+>SmokeDetector<\/a>(?: \| <a[^>]+>MS<\/a>)? [^\]]+?] ([^:]+):(?: post \d+ out of \d+\):)? <a href="([^"]+)">(.+?)<\/a>.* by (?:<a href="[^"]+\/u(sers)?\/(\d+)">(.+?)<\/a>|a deleted user) on <code>([^<]+)<\/code>/;
   autoflagging.hasMoreRegex = /\+\d+ more \(\d+\)/;
+  autoflagging.hasNotificationRegex = /^ \(@.*\)$/;
 
   // Error handling
   autoflagging.notify = Notifier().notify; // eslint-disable-line new-cap
@@ -61,16 +63,24 @@
     autoflagging.decorate($message.children(".ai-information"), data);
     autoflagging.decorate($message.find(".meta .ai-information"), data);
 
-    autoflagging.getAllReasons($message, data);
+    // Remove @ notifications
+    var lastTextNode = $message.find(".content").get(0).lastChild;
+    if (autoflagging.hasNotificationRegex.test(lastTextNode.nodeValue)) {
+      lastTextNode.parentNode.removeChild(lastTextNode);
+    }
+
+    // Temporarily disabled following https://chat.stackexchange.com/transcript/message/44456641#44456641
+    // autoflagging.getAllReasons($message, data);
   };
 
   /*!
    * Extend a report message's reasons when the message was cropped.
    */
+  /* Temporarily disabled following https://chat.stackexchange.com/transcript/message/44456641#44456641
   autoflagging.getAllReasons = function ($message, data) {
     if (autoflagging.hasMoreRegex.test($message.html())) {
       $.get(
-        "https://metasmoke.erwaysoftware.com/api/post/" + data.id + "/reasons",
+        "https://metasmoke.erwaysoftware.com/api/v2.0/post/" + data.id + "/reasons",
         {key: autoflagging.key},
         function (response) {
           if (response && response.items) {
@@ -100,6 +110,7 @@
         });
     }
   };
+  */
 
   /*!
    * Adds the AIM information to the provided element.
@@ -321,7 +332,7 @@
     if ($element.parent().children(":first-child").hasClass("timestamp") && $element.is(":nth-child(2)")) {
       // don’t overlap the timestamp
       $element.css({
-        minHeight: "3em"
+        clear: "both"
       });
     }
   };
@@ -346,15 +357,52 @@
 
       // Loop over all Smokey reports and decorate them
       $(autoflagging.selector).each(function () {
+        var $element = $(this);
         var postURL = autoflagging.getPostURL(this);
-        if (typeof autoflagData[postURL] == "undefined") {
+        var postData = autoflagData[postURL];
+        if (typeof postData == "undefined") {
           return;
         }
-        autoflagging.decorateMessage($(this), autoflagData[postURL]);
         // Post deleted?
-        if (autoflagData[postURL].deleted_at != null) {
+        if (postData.deleted_at != null) {
           $(this).find(".content").toggleClass("ai-deleted");
         }
+
+        if (postData.autoflagged === true) {
+          // Get flagging data
+          url = autoflagging.apiURL + "/posts/" + postData.id + "/flags?key=" + autoflagging.key;
+          debug("URL:", url);
+          $.get(url, function (flaggingData) {
+            autoflagging.decorateMessage($element, flaggingData.items[0]);
+          }).fail(function (xhr) {
+            autoflagging.notify("Failed to load data:", xhr);
+          });
+        } else {
+          // No autoflags
+          autoflagging.decorateMessage($element, {autoflagged: {flagged: false, users: []}});
+        }
+
+        // Get feedback
+        url = autoflagging.apiURL + "/feedbacks/post/" + postData.id + "?filter=HNKJJKGNHOHLNOKINNGOOIHJNLHLOJOHIOFFLJIJJHLNNF&key=" + autoflagging.key;
+        debug("URL:", url);
+        $.get(url, function (feedbackData) {
+          autoflagging.decorateMessage($element, {feedbacks: feedbackData.items});
+        }).fail(function (xhr) {
+          autoflagging.notify("Failed to load data:", xhr);
+        });
+
+        // Get weight
+        url = autoflagging.apiURL + "/posts/" + postData.id + "/reasons?key=" + autoflagging.key;
+        debug("URL:", url);
+        $.get(url, function (reasonsData) {
+          var totalWeight = 0;
+          for (var i = 0; i < reasonsData.items.length; i++) {
+            totalWeight += reasonsData.items[i].weight;
+          }
+          autoflagging.decorateMessage($element, {reason_weight: totalWeight});
+        }).fail(function (xhr) {
+          autoflagging.notify("Failed to load data:", xhr);
+        });
       });
 
       if (data.has_more) {
@@ -388,7 +436,7 @@
         // Show spinner
         if (url !== null) {
           if (urls !== "") {
-            urls += "%3B";
+            urls += ",";
           }
           autoflagging.addSpinnerToMessage($(this));
           urls += url;
@@ -415,7 +463,7 @@
           var url = autoflagging.getPostURL(this);
           if (url !== null) {
             if (urls !== "") {
-              urls += "%3B";
+              urls += ",";
             }
             autoflagging.addSpinnerToMessage($(this));
             urls += url;

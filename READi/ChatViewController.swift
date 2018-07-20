@@ -79,7 +79,7 @@ class ChatViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, 
 		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
-	func keyboardWillShow(notification: NSNotification) {
+	@objc func keyboardWillShow(notification: NSNotification) {
 		// TODO: prevent strange scrolling
 		if keyboardShown {
 			return;
@@ -94,7 +94,7 @@ class ChatViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, 
 		}
 	}
 
-	func keyboardWillHide(notification: NSNotification) {
+	@objc func keyboardWillHide(notification: NSNotification) {
 		if !keyboardShown {
 			return;
 		}
