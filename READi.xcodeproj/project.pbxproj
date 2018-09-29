@@ -257,6 +257,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = KJT8HWZKJX;
 						LastSwiftMigration = 0940;
+						DevelopmentTeam = 75BNT2TPX4;
 						ProvisioningStyle = Automatic;
 					};
 					ABCDCED01E83047D00450E8D = {
@@ -518,13 +519,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KJT8HWZKJX;
+				DEVELOPMENT_TEAM = 75BNT2TPX4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = READi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nobodynada.READi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -539,13 +540,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KJT8HWZKJX;
+				DEVELOPMENT_TEAM = 75BNT2TPX4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = READi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nobodynada.READi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
