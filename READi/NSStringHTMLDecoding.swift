@@ -293,9 +293,9 @@ public extension String {
 		func decode(entity : String) -> Character? {
 			
 			if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
-				return decodeNumeric(string: entity.substring(from: entity.index(entity.startIndex, offsetBy:3)), base: 16)
+				return decodeNumeric(string: String(entity[entity.index(entity.startIndex, offsetBy:3)...]), base: 16)
 			} else if entity.hasPrefix("&#") {
-				return decodeNumeric(string: entity.substring(from: entity.index(entity.startIndex, offsetBy:2)), base: 10)
+				return decodeNumeric(string: String(entity[entity.index(entity.startIndex, offsetBy:2)...]), base: 10)
 			} else {
 				return characterEntities[entity]
 			}
@@ -308,7 +308,7 @@ public extension String {
 		
 		// Find the next '&' and copy the characters preceding it to `result`:
 		while let ampRange = self.range(of: "&", range: position ..< endIndex) {
-			result.append(self[position ..< ampRange.lowerBound])
+			result.append(String(self[position ..< ampRange.lowerBound]))
 			position = ampRange.lowerBound
 			
 			// Find the next ';' and copy everything from '&' to ';' into `entity`
@@ -316,12 +316,12 @@ public extension String {
 				let entity = self[position ..< semiRange.upperBound]
 				position = semiRange.upperBound
 				
-				if let decoded = decode(entity: entity) {
+				if let decoded = decode(entity: String(entity)) {
 					// Replace by decoded character:
 					result.append(decoded)
 				} else {
 					// Invalid entity, copy verbatim:
-					result.append(entity)
+					result.append(String(entity))
 				}
 			} else {
 				// No matching ';'.
@@ -329,7 +329,15 @@ public extension String {
 			}
 		}
 		// Copy remaining characters to `result`:
-		result.append(self[position ..< endIndex])
+		result.append(String(self[position ..< endIndex]))
 		return result
 	}
+}
+
+public extension Formatter {
+	static let iso8601: ISO8601DateFormatter = {
+		let formatter = ISO8601DateFormatter()
+		formatter.formatOptions = [.withInternetDateTime]
+		return formatter
+	}()
 }

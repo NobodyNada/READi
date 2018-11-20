@@ -30,7 +30,7 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 	
 	private var needsResize = false
 	
-	func updateFeedback(notification: NSNotification? = nil) {
+	@objc func updateFeedback(notification: NSNotification? = nil) {
 		let spamCount = report.feedback?.filter { $0.type == .spam }.count ?? 0
 		let vandalismCount = report.feedback?.filter { $0.type == .vandalism }.count ?? 0
 		let naaCount = report.feedback?.filter { $0.type == .naa }.count ?? 0
@@ -75,7 +75,7 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 		
 		if let body = report.attributedBody {
 			body.enumerateAttributes(in: NSRange(0..<body.length)) {attributes, range, stop in
-				if let attachment = attributes[NSAttachmentAttributeName] as? GasMaskTextAttachment {
+				if let attachment = attributes[NSAttributedStringKey.attachment] as? GasMaskTextAttachment {
 					attachment.width = self.bodyLabel.bounds.width
 				}
 			}
@@ -182,10 +182,10 @@ class ReportTableViewCell: UITableViewCell, DTAttributedTextContentViewDelegate 
 			for (key, value) in attrs {
 				//For each attribute at the touch....
 				
-				if key == NSAttachmentAttributeName, let attachment = value as? GasMaskTextAttachment {
+				if key == NSAttributedStringKey.attachment, let attachment = value as? GasMaskTextAttachment {
 					results.append(ClickableElement.gasMask(attachment: attachment))
 				}
-				else if key == NSLinkAttributeName, let target = value as? URL {
+				else if key == NSAttributedStringKey.link, let target = value as? URL {
 					results.append(ClickableElement.link(target: target))
 				}
 				

@@ -18,14 +18,14 @@ class MasterViewController: UITableViewController {
 	private var lastMessage: Date = Date()
 	private var messageTimer: Timer!
 	
-	func feedbackFailed(notification: NSNotification) {
+	@objc func feedbackFailed(notification: NSNotification) {
 		if self.view.window != nil {
 			let details = notification.userInfo?["errorDetails"] as? String
 			self.alert("Failed to send feedback!", details: details)
 		}
 	}
 	
-	func flagFailed(notification: NSNotification) {
+	@objc func flagFailed(notification: NSNotification) {
 		if self.view.window != nil {
 			let details = notification.userInfo?["errorDetails"] as? String
 			self.alert("Failed to flag as spam!", details: details)
@@ -36,21 +36,21 @@ class MasterViewController: UITableViewController {
 	
 	//MARK: - WebSocket
 	
-	func checkMessage(timer: Timer) {
+	@objc func checkMessage(timer: Timer) {
 		if Date.timeIntervalSinceReferenceDate - lastMessage.timeIntervalSinceReferenceDate > 30 {
 			ws.close(1002, reason: "no pings for 30 seconds")
 			//there's probably a better error code than 1002 (protocol error)
 		}
 	}
 	
-	func closeWebsocket() {
+	@objc func closeWebsocket() {
 		wsShouldClose = true
 		messageTimer.invalidate()
 		messageTimer = nil
 		ws.close()
 	}
 	
-	func openWebsocket() {
+	@objc func openWebsocket() {
 		if messageTimer != nil { messageTimer.invalidate() }
 		messageTimer = Timer.scheduledTimer(
 			timeInterval: 30,
@@ -199,7 +199,7 @@ class MasterViewController: UITableViewController {
 		
 	}
 	
-	func refresh(_ sender: Any) {
+	@objc func refresh(_ sender: Any) {
 		print("Refreshing!")
 		DispatchQueue.global().async {
 			do {
@@ -336,9 +336,10 @@ class MasterViewController: UITableViewController {
 	
 	func fetchPosts(page: Int, pageSize: Int) throws -> [Report] {
 		let idResponse: String = try client.get(
-			"https://metasmoke.erwaysoftware.com/api/posts/between" +
-				"?from_date=0&to_date=\(Int(Date().timeIntervalSince1970))" +
-			"&per_page=\(pageSize)&page=\(page)&key=\(client.key)&filter=\(idFilter)"
+			"https://metasmoke.erwaysoftware.com/api/v2.0/posts/between" +
+				"?from=\(Formatter.iso8601.string(from: Date(timeIntervalSince1970: 0)))" +
+				"&to=\(Formatter.iso8601.string(from: Date()))" +
+				"&per_page=\(pageSize)&page=\(page)&key=\(client.key)&filter=\(idFilter)"
 		)
 		
 		guard let idJSON = try client.parseJSON(idResponse) as? [String:Any] else {
@@ -348,8 +349,8 @@ class MasterViewController: UITableViewController {
 		let reports = Report.from(json: idJSON)
         
         let response: String = try client.get(
-            "https://metasmoke.erwaysoftware.com/api/posts/" +
-                reports.flatMap { String($0.id) }.joined(separator: ";") +
+            "https://metasmoke.erwaysoftware.com/api/v2.0/posts/" +
+				reports.compactMap { String($0.id) }.joined(separator: ",") +
             "?per_page=\(pageSize)&key=\(client.key)&filter=\(postsFilter)"
         )
         
